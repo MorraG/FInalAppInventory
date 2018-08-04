@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/see_all"
+        android:title="@string/see_all">
+        <menu>
+            <item
+                android:id="@+id/products"
+                android:title="@string/products" />
+            <item
+                android:id="@+id/clients"
+                android:title="@string/clients" />
+            <item
+                android:id="@+id/transaction_list"
+                android:title="@string/transactions" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/add_item"
+        android:title="@string/add">
+        <menu>
+            <item
+                android:id="@+id/add_product"
+                android:title="@string/new_product" />
+            <item
+                android:id="@+id/add_client"
+                android:title="@string/new_client" />
+            <item
+                android:id="@+id/new_transaction"
+                android:title="@string/new_transaction" />
+        </menu>
+    </item>
+</menu>

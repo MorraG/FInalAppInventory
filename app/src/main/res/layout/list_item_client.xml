@@ -1,0 +1,50 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_item_client_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/paddingOrMar_L"
+        android:layout_marginTop="@dimen/paddingOrMar_S"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Client name" />
+
+    <TextView
+        android:id="@+id/list_item_client_contact_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/paddingOrMar_L"
+        android:layout_marginTop="@dimen/paddingOrMar_S"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_client_name"
+        tools:text="Contact person" />
+
+    <View android:id="@+id/client_item_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/paddingOrMar_S"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/list_item_client_contact_person"
+        app:layout_constraintEnd_toStartOf="@id/enterprise_item_phone_button"/>
+
+
+    <ImageButton
+        android:id="@+id/enterprise_item_phone_button"
+        android:layout_width="61dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/paddingOrMar_S"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/list_item_client_contact_person"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_contact_phone" />
+</android.support.constraint.ConstraintLayout>

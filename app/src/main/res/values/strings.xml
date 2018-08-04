@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">FInalAppInventory</string>
+
+    //PAGINA PRINCIPALE
+    <string name="no_products_found">No products found. You can begin adding products by clicking on + button</string>
+
+    //MENU
+    <string name="see_all">SEE ALL:</string>
+    <string name="add">ADD:</string>
+
+    <string name="products">Products</string>
+    <string name="clients">Clients</string>
+    <string name="transactions">Transactions</string>
+
+    <string name="new_product">New Product</string>
+    <string name="new_client">New Client</string>
+    <string name="new_transaction">New Purchase</string>
+    <string name="add_product">Add Product</string>
+    //MENU DELETE
+    <string name="delete">Delete</string>
+    //APPBAR MAIN (FAB - WIDGET)
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="cancel">Cancel</string>
+
+    //fragment add product
+    <string name="save">Save</string>
+    <string name="product_name">Product Name:</string>
+    <string name="sale_price">Sale Price:</string>
+    <string name="in_stock_alone">In stock:</string>
+    <string name="client">Client:</string>
+    <string name="add_client"><u>Add Client</u></string>
+    <string name="add_image">Add image:</string>
+    <string name="quantity_in_stock">Quantity In Stock:</string>
+    <string name="quantity">Quantity:</string>
+    <string name="price">Price:</string>
+
+    //fragment add client
+    <string name="name">Name:</string>
+    <string name="address">Address:</string>
+    <string name="e_mail">E-mail:</string>
+    <string name="phone">Phone:</string>
+    <string name="contact_person">Contact person:</string>
+
+    //operations e validator
+    <string name="price_should_be_number">Price should be a positive real number</string>
+    <string name="enterprise_successfully_saved">Entry is successfully saved</string>
+    <string name="error_updating">Error updating</string>
+    <string name="error_saving">Error with saving</string>
+    <string name="successfully_updated">Successfully updated</string>
+    <string name="product_name_empty">Product name cannot be empty</string>
+    <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
+    <string name="product_saved_successfully">Product saved with row id:</string>
+    <string name="error_saving_product">Error with saving product</string>
+
+</resources>

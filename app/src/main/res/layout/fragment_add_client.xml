@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/FieldStyle"
+        android:text="@string/name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editSupplierName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editSupplierName"
+        style="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/FieldStyle"
+        android:text="@string/address"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editSupplierAddress"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editSupplierAddress"
+        style="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editSupplierName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/FieldStyle"
+        android:text="@string/e_mail"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editSupplierEMail"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editSupplierEMail"
+        style="@style/editTextStyle"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editSupplierAddress" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/FieldStyle"
+        android:text="@string/phone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editSupplierPhone"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editSupplierPhone"
+        style="@style/editTextStyle"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editSupplierEMail" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/FieldStyle"
+        android:text="@string/contact_person"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editContactPerson"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editContactPerson"
+        style="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editSupplierPhone" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="textView2,textView3,textView4,textView5,textView6"
+        tools:layout_editor_absoluteX="91dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/save_client_btn"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="442dp"
+        tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

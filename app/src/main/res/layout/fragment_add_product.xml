@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/FieldStyle"
+        android:text="@string/product_name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editProductName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editProductName"
+        style="@style/editTextStyle"
+        android:layout_marginTop="@dimen/paddingOrMar_L"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/FieldStyle"
+        android:text="@string/sale_price"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editSalePrice"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editSalePrice"
+        style="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editProductName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/FieldStyle"
+        android:text="@string/in_stock_alone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editQuantity"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editQuantity"
+        style="@style/editTextStyle"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editSalePrice" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/FieldStyle"
+        android:text="@string/client"
+        app:layout_constraintBottom_toBottomOf="@+id/supplierSpinner"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/supplierSpinner"
+        style="@style/editTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editQuantity" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="textView2,textView3,textView4,textView5"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="91dp" />
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <TextView
+        android:id="@+id/add_client_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/add_client"
+        android:textColor="@color/colorAccent"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/supplierSpinner" />
+
+
+</android.support.constraint.ConstraintLayout>
