@@ -284,8 +284,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-  /*  private void openEnterpriseListFragment(String relationshipType){
-        EnterpriseListFragment clientListFrag = new EnterpriseListFragment();
+    private void openClientListFragment(String relationshipType){
+        ClientListFragment clientListFrag = new ClientListFragment();
         Bundle args = new Bundle();
         args.putString(Costants.RELATION_TYPE, relationshipType);
         clientListFrag.setArguments(args);
@@ -296,16 +296,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void openTransactionListFragment(String transaction){
-        AddTransactionFragment transactionFrag = new AddTransactionFragment();
-        Bundle args = new Bundle();
-        args.putString(Costants.TRANSACTION, transaction);
-        transactionFrag.setArguments(args);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, transactionFrag)
-                .addToBackStack(null)
-                .commit();
-    }*/
+//    private void openTransactionListFragment(String transaction){
+//        AddTransactionFragment transactionFrag = new AddTransactionFragment();
+//        Bundle args = new Bundle();
+//        args.putString(Costants.TRANSACTION, transaction);
+//        transactionFrag.setArguments(args);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.container, transactionFrag)
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     //Custom transition used during the transition of constraint sets
     static private class MyTransition extends TransitionSet {

@@ -33,11 +33,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/list_item_client_contact_person"
-        app:layout_constraintEnd_toStartOf="@id/enterprise_item_phone_button"/>
+        app:layout_constraintEnd_toStartOf="@id/client_item_phone_button"/>
 
 
     <ImageButton
-        android:id="@+id/enterprise_item_phone_button"
+        android:id="@+id/client_item_phone_button"
         android:layout_width="61dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"

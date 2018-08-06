@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/paddingOrMar_L"
-            android:background="@drawable/ic_add_circle"
+            app:srcCompat="@drawable/ic_add_circle"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -73,12 +73,24 @@
             android:background="@color/hint_background"
             android:gravity="center_horizontal"
             android:text="@string/add_product"
+            android:textStyle="bold"
             android:textSize="@dimen/hint_textsize"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_add_item"
             app:layout_constraintStart_toEndOf="@+id/fab_transaction"
             app:layout_constraintTop_toTopOf="@id/fab_add_item" />
 
+        <TextView
+            android:id="@+id/hint_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/hint_background"
+            android:gravity="center_horizontal"
+            android:text="@string/new_transaction"
+            android:textStyle="bold"
+            android:textSize="@dimen/hint_textsize"
+            app:layout_constraintEnd_toEndOf="@+id/fab_transaction"
+            app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
         <TextView
             android:id="@+id/hint_cancel"
@@ -87,6 +99,7 @@
             android:background="@color/hint_background"
             android:gravity="center_horizontal"
             android:text="@string/cancel"
+            android:textStyle="bold"
             android:textSize="@dimen/hint_textsize"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_main"
