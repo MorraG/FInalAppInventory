@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@id/fab_add_item" />
 
     <TextView
-        android:id="@+id/hint_acquisition"
+        android:id="@+id/hint_purchase"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

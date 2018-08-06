@@ -21,6 +21,8 @@
     //APPBAR MAIN (FAB - WIDGET)
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="cancel">Cancel</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     //fragment add product
     <string name="save">Save</string>
@@ -42,7 +44,6 @@
     <string name="contact_person">Contact person:</string>
 
     //operations e validator
-    <string name="price_should_be_number">Price should be a positive real number</string>
     <string name="enterprise_successfully_saved">Entry is successfully saved</string>
     <string name="error_updating">Error updating</string>
     <string name="error_saving">Error with saving</string>
@@ -51,5 +52,13 @@
     <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
     <string name="product_saved_successfully">Product saved with row id:</string>
     <string name="error_saving_product">Error with saving product</string>
+    <string name="quantity_should_be_positive">Quantity should be a positive integer</string>
+    <string name="price_should_be_number">Price should be a positive real number</string>
+
+    //fragment productlist
+    <string name="all_products">All products</string>
+    <string name="in_stock">In stock: %1$d</string>
+    <string name="edit_product">Edit Product</string>
+
 
 </resources>
