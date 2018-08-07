@@ -4,15 +4,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
 import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.data.InventoryDBHelper;
+
 
 import java.util.ArrayList;
 
 public final class DatabaseUtils {
 
     public static ArrayList<String> getClientsNames(Context context, String relationshipType){
-        ArrayList<String> clientList = new ArrayList<>();
+        ArrayList<String> enterpriseList = new ArrayList<>();
         String[] projection = {InventoryContract.ClientEntry.CLIENT_NAME};
         String[] selectionArgs = {relationshipType};
         Cursor cursor = context.getContentResolver().query(InventoryContract.ClientEntry.CONTENT_URI,
@@ -21,12 +23,12 @@ public final class DatabaseUtils {
                 selectionArgs,
                 null);
         while (cursor.moveToNext()) {
-            int clientNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
-            String clientName = cursor.getString(clientNameColumnIndex);
-            clientList.add(clientName);
+            int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
+            String supplierName = cursor.getString(supplierNameColumnIndex);
+            enterpriseList.add(supplierName);
         }
         cursor.close();
-        return clientList;
+        return enterpriseList;
     }
 
     public static Cursor mergeTables(Context context, long id){

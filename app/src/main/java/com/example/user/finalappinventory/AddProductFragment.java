@@ -91,7 +91,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         save_product_btn.setOnClickListener(this);
         add_supplier_btn.setOnClickListener(this);
 
-        //Set the spinner which shows existing supplier names
+        //Set the spinner which shows existing client names
         mClientSpin.setOnItemSelectedListener(this);
         clientNames = DatabaseUtils.getClientsNames(getActivity(), Costants.CLIENT);
         mSpinAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, clientNames);
