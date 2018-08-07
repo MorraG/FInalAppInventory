@@ -17,8 +17,8 @@ public final class DatabaseUtils {
         String[] selectionArgs = {relationshipType};
         Cursor cursor = context.getContentResolver().query(InventoryContract.ClientEntry.CONTENT_URI,
                 projection,
-                InventoryContract.ClientEntry.RELATION_TYPE + "=?",
-                selectionArgs,
+                null,
+                null,
                 null);
         while (cursor.moveToNext()) {
             int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);

@@ -77,8 +77,8 @@ public class InventoryProvider extends ContentProvider {
                 cursor = database.query(
                         ClientEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
-                        ClientEntry.RELATION_TYPE + "=?", // The columns for the WHERE clause
-                        selectionArgs,                  // The values for the WHERE clause
+                        null, // The columns for the WHERE clause
+                        null,                  // The values for the WHERE clause
                         null,                  // Don't group the rows
                         null,                  // Don't filter by row groups
                         null);                   // The sort order

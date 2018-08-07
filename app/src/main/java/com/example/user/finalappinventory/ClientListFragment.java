@@ -71,7 +71,7 @@ public class ClientListFragment extends Fragment implements
         String[] selectionArgs = {mTypeOfRelationship};
         return new CursorLoader(getActivity(), InventoryContract.ClientEntry.CONTENT_URI,
                 projection,
-                InventoryContract.ClientEntry.RELATION_TYPE + "=?",
+                null,
                 selectionArgs, null);
     }
 

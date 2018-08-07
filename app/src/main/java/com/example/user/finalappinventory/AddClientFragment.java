@@ -99,7 +99,7 @@ public class AddClientFragment extends Fragment implements View.OnClickListener,
         values.put(InventoryContract.ClientEntry.CLIENT_EMAIL, enterpriseEmail);
         values.put(InventoryContract.ClientEntry.CLIENT_PHONE, enterprisePhone);
         values.put(InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON, contactPerson);
-        values.put(InventoryContract.ClientEntry.RELATION_TYPE, mTypeOfRelationship);
+        /*values.put(InventoryContract.ClientEntry.RELATION_TYPE, mTypeOfRelationship);*/
 
         if (mCurrentClientUri == null) {
             //This is a new supplier or client

@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 public class InventoryContract {
 
 
-        public static final String CONTENT_AUTHORITY = "com.example.user.finalappinventory.data";
+        public static final String CONTENT_AUTHORITY = "com.example.user.finalappinventory";
 
         private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
@@ -81,7 +81,5 @@ public class InventoryContract {
         //Type: TEXT
         public final static String CLIENT_CONTACT_PERSON = "clientContactPerson";
 
-        //Type: TEXT
-        public final static String RELATION_TYPE = "relationType";
     }
 }
