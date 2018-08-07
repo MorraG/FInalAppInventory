@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:padding="@dimen/paddingOrMar_S">
 
+    <Button
+        android:id="@+id/save_btn2"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/paddingOrMar_XXXL"
+        android:gravity="center"
+        android:text="@string/save"
+        app:layout_constraintStart_toEndOf="@id/product_item_product_name"
+        tools:layout_editor_absoluteY="@dimen/paddingOrMar_XL" />
+
     <TextView
         android:id="@+id/product_item_product_name"
         android:layout_width="wrap_content"

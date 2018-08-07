@@ -89,6 +89,7 @@
             android:text="@string/new_transaction"
             android:textStyle="bold"
             android:textSize="@dimen/hint_textsize"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_transaction"
             app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
