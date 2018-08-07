@@ -127,7 +127,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                             .setSecondaryText("Tap to add new client")
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                 @Override
-                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {
                                     //that button already has a click listener
                                 }
                             })

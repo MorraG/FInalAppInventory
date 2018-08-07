@@ -12,40 +12,25 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.user.finalappinventory.data.InventoryContract.ProductEntry;
+import com.example.user.finalappinventory.data.InventoryContract.ClientEntry;
+
 public class InventoryProvider extends ContentProvider {
 
-    /**
-     * Tag for the log messages
-     */
-    public static final String LOG_TAG = InventoryProvider.class.getSimpleName();
-
-    /**
-     * URI matcher code for the content URI for the pets table
-     */
     private static final int PRODUCTS = 100;
-
-    /**
-     * URI matcher code for the content URI for a single pet in the pets table
-     */
-    private static final int PRODUCT_ID = 101;
+    private static final int PRODUCT_WITH_ID = 101;
 
     private static final int CLIENTS = 200;
-    private static final int CLIENT_ID = 201;
-    /**
-     * UriMatcher object to match a content URI to a corresponding code.
-     * The input passed into the constructor represents the code to return for the root URI.
-     * It's common to use NO_MATCH as the input for this case.
-     */
-    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final int CLIENTS_ID = 201;
 
-    static {
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS, PRODUCTS);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS + "/#", PRODUCT_ID);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS, CLIENTS);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS + "/#", CLIENT_ID);
-    }
+   /* private static final int TRANSACTIONS = 300;
+    private static final int TRANSACTIONS_WITH_ID = 301;*/
 
     private InventoryDBHelper mDbHelper;
+
+    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    private static final String LOG_TAG = InventoryProvider.class.getSimpleName();
 
     @Override
     public boolean onCreate() {
@@ -54,6 +39,15 @@ public class InventoryProvider extends ContentProvider {
         return true;
     }
 
+    static {
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS, PRODUCTS);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS + "/#", PRODUCT_WITH_ID);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS, CLIENTS);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS + "/#", CLIENTS_ID);
+
+    }
+
+    @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
@@ -62,7 +56,7 @@ public class InventoryProvider extends ContentProvider {
         switch (match) {
             case PRODUCTS: {
                 cursor = database.query(
-                        InventoryContract.ProductEntry.TABLE_NAME,   // The table to query
+                        ProductEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
                         null, // The columns for the WHERE clause
                         null,                  // The values for the WHERE clause
@@ -71,30 +65,30 @@ public class InventoryProvider extends ContentProvider {
                         null);                   // The sort order
                 break;
             }
-            case PRODUCT_ID: {
-                selection = InventoryContract.ProductEntry._ID + "=?";
+            case PRODUCT_WITH_ID: {
+                selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-                cursor = database.query(InventoryContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, null);
                 break;
             }
             case CLIENTS: {
                 cursor = database.query(
-                        InventoryContract.ClientEntry.TABLE_NAME,   // The table to query
+                        ClientEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
-                        InventoryContract.ClientEntry.RELATION_TYPE + "=?", // The columns for the WHERE clause
+                        ClientEntry.RELATION_TYPE + "=?", // The columns for the WHERE clause
                         selectionArgs,                  // The values for the WHERE clause
                         null,                  // Don't group the rows
                         null,                  // Don't filter by row groups
                         null);                   // The sort order
                 break;
             }
-            case CLIENT_ID: {
-                selection = InventoryContract.ClientEntry._ID + "=?";
+            case CLIENTS_ID: {
+                selection = ClientEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-                cursor = database.query(InventoryContract.ClientEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(ClientEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, null);
                 break;
             }
@@ -111,13 +105,13 @@ public class InventoryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS:
-                return InventoryContract.ProductEntry.CONTENT_LIST_TYPE;
-            case PRODUCT_ID:
-                return InventoryContract.ProductEntry.CONTENT_ITEM_TYPE;
+                return ProductEntry.CONTENT_LIST_TYPE;
+            case PRODUCT_WITH_ID:
+                return ProductEntry.CONTENT_ITEM_TYPE;
             case CLIENTS:
-                return InventoryContract.ClientEntry.CONTENT_LIST_TYPE;
-            case CLIENT_ID:
-                return InventoryContract.ClientEntry.CONTENT_ITEM_TYPE;
+                return ClientEntry.CONTENT_LIST_TYPE;
+            case CLIENTS_ID:
+                return ClientEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
@@ -126,17 +120,18 @@ public class InventoryProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         long id;
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS: {
-                id = database.insert(InventoryContract.ProductEntry.TABLE_NAME, null, values);
+                id = database.insert(ProductEntry.TABLE_NAME, null, values);
                 break;
             }
             case CLIENTS: {
-                id = database.insert(InventoryContract.ProductEntry.TABLE_NAME, null, values);
+                id = database.insert(ClientEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
@@ -159,20 +154,21 @@ public class InventoryProvider extends ContentProvider {
         int rowsDeleted;
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case PRODUCT_ID: {
+            case PRODUCT_WITH_ID: {
                 // Delete a single row given by the ID in the URI
-                selection = InventoryContract.ProductEntry._ID + "=?";
+                selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = database.delete(InventoryContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
-            case CLIENT_ID: {
+            case CLIENTS_ID: {
                 // Delete a single row given by the ID in the URI
-                selection = InventoryContract.ClientEntry._ID + "=?";
+                selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = database.delete(InventoryContract.ClientEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(ClientEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
+
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
@@ -193,22 +189,23 @@ public class InventoryProvider extends ContentProvider {
         int rowsUpdated;
         switch (match) {
             case PRODUCTS: {
-                rowsUpdated = database.update(InventoryContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = database.update(ProductEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
-            case PRODUCT_ID: {
-                selection = InventoryContract.ProductEntry._ID + "=?";
+            case PRODUCT_WITH_ID: {
+                selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsUpdated = database.update(InventoryContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = database.update(ProductEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
-            case CLIENT_ID: {
-                selection = InventoryContract.ClientEntry._ID + "=?";
+            case CLIENTS_ID: {
+                selection = ClientEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsUpdated = database.update(InventoryContract.ClientEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = database.update(ClientEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
-           default:
+
+            default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
 

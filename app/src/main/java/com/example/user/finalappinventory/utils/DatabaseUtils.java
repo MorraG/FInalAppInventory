@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
 import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.data.InventoryDBHelper;
-
 
 import java.util.ArrayList;
 
@@ -35,6 +33,6 @@ public final class DatabaseUtils {
         InventoryDBHelper dbHelper = new InventoryDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] selectionArgs = {String.valueOf(id)};
-        return db.rawQuery("SELECT products.productName, products.clientName, clients.clientPhone FROM products INNER JOIN clients ON (products.clientName = clients.clientName AND products._ID=?)", selectionArgs);
+        return db.rawQuery("SELECT products.productName, products.clientName, clients.clientPhone FROM products INNER JOIN clients ON (products.supplierName = clients.clientName AND products._ID=?)", selectionArgs);
     }
 }
