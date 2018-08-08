@@ -47,20 +47,39 @@ public class ProductListFragment extends Fragment implements
         View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
         getActivity().setTitle(getString(R.string.all_products));
 
-        mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
-        // FIND VIEWS
+        //Find Views:
         ListView listView = rootView.findViewById(R.id.list);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
         TextView empty_tv = rootView.findViewById(R.id.empty_text);
+        mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
         Button delete_product_btn = rootView.findViewById(R.id.delete_btn);
 
-        //Set adapter , text , view, listener
+        //Set Adapter
         listView.setAdapter(mCursorAdapter);
-        empty_tv.setText(R.string.no_products_found);
+
+        // Set text on empty view
         listView.setEmptyView(empty_screen);
-        //delete_product_btn.setOnClickListener();
+        empty_tv.setText(R.string.no_products_found);
+
+//        delete_product_btn.setOnClickListener(this);  Perchè chiede il cast??
 
 
+
+        // forse utile per provare a fare come per i clienti?
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AddProductFragment addProductFrag = new AddProductFragment();
+                Bundle args = new Bundle();
+                Uri currentProductUri = ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
+                args.putString(Costants.PRODUCT_URI, currentProductUri.toString());
+                addProductFrag.setArguments(args);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, addProductFrag)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });*/
         getLoaderManager().initLoader(Costants.PRODUCT_LOADER_ID, null, this);
         return rootView;
     }

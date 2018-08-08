@@ -1,23 +1,17 @@
 package com.example.user.finalappinventory;
 
-import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
-import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -31,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,13 +33,10 @@ import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 import com.example.user.finalappinventory.utils.DatabaseUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
-import static android.app.Activity.RESULT_OK;
 
 public class AddProductFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener,
@@ -60,9 +50,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private Uri mCurrentProductUri;
     private Spinner mClientSpin;
     private ArrayAdapter<String> mSpinAdapter;
-    private int mUsersChoice;
 
- /*   click listener for implementation of image
+  /*  click listener for implementation of image
 
   final DialogInterface.OnClickListener mDialogClickListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int item) {
