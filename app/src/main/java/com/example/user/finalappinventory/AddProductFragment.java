@@ -50,6 +50,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private Uri mCurrentProductUri;
     private Spinner mClientSpin;
     private ArrayAdapter<String> mSpinAdapter;
+    private Button mButtonDash = getView().findViewById(R.id.meno);
+    private Button mButtonPlus = getView().findViewById(R.id.piu);
+    private int quantityAddProduct = 0;
 
   /*  click listener for implementation of image
 
@@ -97,6 +100,32 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             getActivity().setTitle(getString(R.string.add_product));
             getActivity().invalidateOptionsMenu();
+            quantityAddProduct = 0;
+            mButtonDash.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    if (quantityAddProduct > 0){
+
+                        quantityAddProduct = quantityAddProduct - 1;
+                        quantity_et.setText(String.valueOf(quantityAddProduct));
+
+                    }else{
+
+                        Toast.makeText(getActivity(), getString(R.string.quantity_cannot_be_negative), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
+
+            mButtonPlus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    quantityAddProduct = quantityAddProduct + 1;
+                    quantity_et.setText(String.valueOf(quantityAddProduct));
+
+                }
+            });
         } else {
             getActivity().setTitle(getString(R.string.edit_product));
             getLoaderManager().initLoader(Costants.SINGLE_PRODUCT_LOADER, null, this);
@@ -309,6 +338,34 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             salePrice_et.setText(String.valueOf(price));
             quantity_et.setText(String.valueOf(quantity));
             mClientSpin.setSelection(mSpinAdapter.getPosition(clientName));
+
+            quantityAddProduct = cursor.getInt(quantityColumnIndex);
+
+            mButtonDash.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    if (quantityAddProduct > 0){
+
+                        quantityAddProduct = quantityAddProduct - 1;
+                        quantity_et.setText(String.valueOf(quantityAddProduct));
+
+                    }else{
+
+                        Toast.makeText(getActivity(), getString(R.string.quantity_cannot_be_negative), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
+
+            mButtonPlus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    quantityAddProduct = quantityAddProduct + 1;
+                    quantity_et.setText(String.valueOf(quantityAddProduct));
+
+                }
+            });
         }
     }
 

@@ -31,12 +31,15 @@
     <string name="in_stock_alone">In stock:</string>
     <string name="client">Client:</string>
     <string name="add_client"><u>Add New Client</u></string>
-    <string name="add_image">Add image:</string>
     <string name="quantity_in_stock">Quantity In Stock:</string>
+    <string name="quantity_cannot_be_negative">Quantity cnnot be negative</string>
+
     <string name="quantity">Quantity:</string>
     <string name="price">Price:</string>
     <string name="hint_addClient_primary">If the client is not already in the list</string>
     <string name="hint_addClient_secondary">Tap to add new client</string>
+    <string name="piu">+</string>
+    <string name="meno">-</string>
 
     //fragment add client
     <string name="name">Name:</string>

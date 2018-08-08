@@ -45,10 +45,9 @@
     <EditText
         android:id="@+id/editQuantity"
         style="@style/editTextStyle"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/meno"
         app:layout_constraintStart_toEndOf="@+id/barrier"
-        app:layout_constraintTop_toBottomOf="@+id/editSalePrice" />
+        app:layout_constraintTop_toBottomOf="@+id/editSalePrice"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -96,6 +95,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toBottomOf="@+id/clientSpinner" />
+
+    <Button
+        android:id="@+id/meno"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/meno"
+        app:layout_constraintEnd_toEndOf="@id/editSalePrice"
+        app:layout_constraintBottom_toTopOf="@id/clientSpinner"
+        app:layout_constraintLeft_toRightOf="@+id/editQuantity"/>
+    <Button
+        android:id="@+id/piu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/piu"
+        app:layout_constraintStart_toStartOf="@id/meno"
+        app:layout_constraintBottom_toTopOf="@id/meno"/>
 
 
 </android.support.constraint.ConstraintLayout>
