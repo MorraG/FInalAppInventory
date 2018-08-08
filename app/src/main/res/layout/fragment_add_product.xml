@@ -45,6 +45,7 @@
     <EditText
         android:id="@+id/editQuantity"
         style="@style/editTextStyle"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@id/meno"
         app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toBottomOf="@+id/editSalePrice"/>

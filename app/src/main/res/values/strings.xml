@@ -10,6 +10,7 @@
 
     <string name="products">Products</string>
     <string name="clients">Clients</string>
+    <string name="suppliers">Suppliers</string>
     <string name="transactions">Transactions</string>
 
     <string name="new_product">New Product</string>
@@ -54,6 +55,7 @@
     <string name="error_saving">Error with saving</string>
     <string name="successfully_updated">Successfully updated</string>
     <string name="product_name_empty">Product name cannot be empty</string>
+    <string name="client_name_empty">Client name cannot be empty</string>
     <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
     <string name="product_saved_successfully">Product saved with row id:</string>
     <string name="error_saving_product">Error with saving product</string>

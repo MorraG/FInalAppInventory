@@ -11,8 +11,12 @@
                 android:id="@+id/products"
                 android:title="@string/products" />
             <item
+                android:id="@+id/suppliers"
+                android:title="@string/suppliers" />
+            <item
                 android:id="@+id/clients"
                 android:title="@string/clients" />
+
             <item
                 android:id="@+id/transaction_list"
                 android:title="@string/transactions" />

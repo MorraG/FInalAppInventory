@@ -50,9 +50,11 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private Uri mCurrentProductUri;
     private Spinner mClientSpin;
     private ArrayAdapter<String> mSpinAdapter;
-    private Button mButtonDash = getView().findViewById(R.id.meno);
-    private Button mButtonPlus = getView().findViewById(R.id.piu);
-    private int quantityAddProduct = 0;
+
+    private Button mButtonDash;
+    private Button mButtonPlus;
+
+    private int quantityAddProduct;
 
   /*  click listener for implementation of image
 
@@ -78,6 +80,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mClientSpin = rootView.findViewById(R.id.clientSpinner);
         Button save_product_btn = rootView.findViewById(R.id.save_btn);
         TextView add_supplier_btn = rootView.findViewById(R.id.add_client_btn);
+        mButtonDash = rootView.findViewById(R.id.meno);
+        mButtonPlus = rootView.findViewById(R.id.piu);
 
         //Set click listeners on buttons
         save_product_btn.setOnClickListener(this);
