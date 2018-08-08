@@ -2,6 +2,7 @@ package com.example.user.finalappinventory;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,13 +13,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.finalappinventory.R;
 import com.example.user.finalappinventory.adapters.ProductCursorAdapter;
@@ -26,10 +32,11 @@ import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 
 public class ProductListFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>, ProductCursorAdapter.ItemClickListener {
 
     private ProductCursorAdapter mCursorAdapter;
     private Context mContext;
+    private Uri mCurrentProductUri;
 
 
     @Override
@@ -51,8 +58,7 @@ public class ProductListFragment extends Fragment implements
         ListView listView = rootView.findViewById(R.id.list);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
         TextView empty_tv = rootView.findViewById(R.id.empty_text);
-        mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
-        Button delete_product_btn = rootView.findViewById(R.id.delete_btn);
+        mCursorAdapter = new ProductCursorAdapter(getActivity(), null, this);
 
         //Set Adapter
         listView.setAdapter(mCursorAdapter);
@@ -61,28 +67,25 @@ public class ProductListFragment extends Fragment implements
         listView.setEmptyView(empty_screen);
         empty_tv.setText(R.string.no_products_found);
 
-//        delete_product_btn.setOnClickListener(this);  Perchè chiede il cast??
 
-
-
-        // forse utile per provare a fare come per i clienti?
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AddProductFragment addProductFrag = new AddProductFragment();
-                Bundle args = new Bundle();
-                Uri currentProductUri = ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
-                args.putString(Costants.PRODUCT_URI, currentProductUri.toString());
-                addProductFrag.setArguments(args);
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, addProductFrag)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });*/
         getLoaderManager().initLoader(Costants.PRODUCT_LOADER_ID, null, this);
         return rootView;
     }
+
+    @Override
+
+    public void onItemClicked(long id) {
+        AddProductFragment addProductFragment = new AddProductFragment();
+        Bundle args = new Bundle();
+        Uri currentProductUri = ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
+        args.putString(Costants.PRODUCT_URI, currentProductUri.toString());
+        addProductFragment.setArguments(args);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, addProductFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -105,5 +108,53 @@ public class ProductListFragment extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mContext = null;
+    }
+
+    // DA QUI tutto quello che riguarda l'operazione di cancellazione prodotto
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_with_delete, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_delete){
+            openAlertDialogForDelete();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void openAlertDialogForDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
+        builder.setMessage("Do you want to delete this item from the database?");
+        builder.setPositiveButton("Yes, delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteProduct();
+                getActivity().onBackPressed();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+    private void deleteProduct(){
+        if(mCurrentProductUri != null){
+            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentProductUri, null, null);
+            // Show a toast message depending on whether or not the delete was successful.
+            if (rowsDeleted == 0) {
+                // If no rows were deleted, then there was an error with the delete.
+                Toast.makeText(getActivity(), "Error during delete",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the delete was successful and we can display a toast.
+                Toast.makeText(getActivity(), "product successfully deleted",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

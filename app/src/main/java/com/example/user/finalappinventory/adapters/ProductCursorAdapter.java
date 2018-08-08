@@ -17,9 +17,11 @@ import java.text.NumberFormat;
 
 public class ProductCursorAdapter extends CursorAdapter {
 
+    final ItemClickListener mCallback;
 
-    public ProductCursorAdapter(@NonNull Context context, Cursor cursor) {
+    public ProductCursorAdapter(@NonNull Context context, Cursor cursor, ItemClickListener listener) {
         super(context, cursor, 0);
+        mCallback = listener;
     }
 
     @Override
@@ -44,6 +46,15 @@ public class ProductCursorAdapter extends CursorAdapter {
         holder.quantity_tv.setText(mContext.getString(R.string.in_stock, quantity));
         holder.price_tv.setText(NumberFormat.getCurrencyInstance().format(price));
 
+        final int position = cursor.getPosition();
+        container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCursor.moveToPosition(position);
+                long id = mCursor.getLong(mCursor.getColumnIndex(InventoryContract.ClientEntry._ID));
+                mCallback.onItemClicked(id);
+            }
+        });
 
     }
 
@@ -58,5 +69,8 @@ public class ProductCursorAdapter extends CursorAdapter {
             this.price_tv = view.findViewById(R.id.product_item_price);
             this.quantity_tv = view.findViewById(R.id.product_item_quantity);
         }
+    }
+    public interface ItemClickListener{
+        void onItemClicked(long id);
     }
 }

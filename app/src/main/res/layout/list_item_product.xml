@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/paddingOrMar_S">
 
-    <Button
-        android:id="@+id/delete_btn"
-        style="@style/buttonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/paddingOrMar_XXXL"
-        android:layout_marginTop="@dimen/paddingOrMar_S"
-        android:text="@string/deleteProduct"
-        app:layout_constraintStart_toEndOf="@id/product_item_product_name"
-        app:layout_constraintTop_toTopOf="@id/product_item_image"/>
+
 
     <View android:id="@+id/product_item_container"
         android:layout_width="0dp"
@@ -24,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/product_item_quantity"
-        app:layout_constraintEnd_toStartOf="@id/delete_btn"/>
+        app:layout_constraintEnd_toEndOf="@id/product_item_product_name"/>
 
     <TextView
         android:id="@+id/product_item_product_name"
