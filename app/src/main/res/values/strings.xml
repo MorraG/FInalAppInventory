@@ -45,7 +45,7 @@
     <string name="piu">+</string>
     <string name="meno">-</string>
 
-    //fragment add client
+    //fragment add supplier
     <string name="name">Name:</string>
     <string name="address">Address:</string>
     <string name="e_mail">E-mail:</string>
@@ -65,7 +65,9 @@
     <string name="error_saving_product">Error with saving product</string>
     <string name="quantity_should_be_positive">Quantity should be a positive integer</string>
     <string name="price_should_be_number">Price should be a positive real number</string>
-
+    <string name="Error_during_delete">Error during delete</string>
+    <string name="Successful_deletingSupl">supplier successfully deleted</string>
+    <string name="Successful_deletingProd">product successfully deleted</string>
     //fragment productlist
     <string name="all_products">All products</string>
     <string name="in_stock">In stock: %1$d</string>
