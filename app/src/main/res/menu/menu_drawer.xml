@@ -31,8 +31,8 @@
                 android:id="@+id/add_product"
                 android:title="@string/new_product" />
             <item
-                android:id="@+id/add_client"
-                android:title="@string/new_client" />
+                android:id="@+id/add_supplier"
+                android:title="@string/new_supplier" />
             <item
                 android:id="@+id/new_transaction"
                 android:title="@string/new_transaction" />

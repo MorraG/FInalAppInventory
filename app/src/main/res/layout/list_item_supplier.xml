@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/list_item_client_name"
+        android:id="@+id/list_item_supplier_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/paddingOrMar_L"
@@ -17,33 +17,33 @@
         tools:text="Client name" />
 
     <TextView
-        android:id="@+id/list_item_client_contact_person"
+        android:id="@+id/list_item_supplier_contact_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/paddingOrMar_L"
         android:layout_marginTop="@dimen/paddingOrMar_S"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_client_name"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_supplier_name"
         tools:text="Contact person" />
 
-    <View android:id="@+id/client_item_container"
+    <View android:id="@+id/supplier_item_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/paddingOrMar_S"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/list_item_client_contact_person"
-        app:layout_constraintEnd_toStartOf="@id/client_item_phone_button"/>
+        app:layout_constraintBottom_toBottomOf="@id/list_item_supplier_contact_person"
+        app:layout_constraintEnd_toStartOf="@id/supplier_item_phone_button"/>
 
 
     <ImageButton
-        android:id="@+id/client_item_phone_button"
+        android:id="@+id/supplier_item_phone_button"
         android:layout_width="61dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="@dimen/paddingOrMar_S"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/list_item_client_contact_person"
+        app:layout_constraintBottom_toBottomOf="@+id/list_item_supplier_contact_person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_contact_phone" />

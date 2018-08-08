@@ -16,36 +16,36 @@ import android.widget.TextView;
 import com.example.user.finalappinventory.R;
 import com.example.user.finalappinventory.data.InventoryContract;
 
-public class ClientCursorAdapter extends CursorAdapter {
+public class SupplierCursorAdapter extends CursorAdapter {
 
     final ItemClickListener mCallback;
 
-    public ClientCursorAdapter(@NonNull Context context, Cursor cursor, ItemClickListener listener) {
+    public SupplierCursorAdapter(@NonNull Context context, Cursor cursor, ItemClickListener listener) {
         super(context, cursor, 0);
         mCallback = listener;
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.list_item_client, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.list_item_supplier, parent, false);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView supplierName_tv = view.findViewById(R.id.list_item_client_name);
-        TextView contact_person_tv = view.findViewById(R.id.list_item_client_contact_person);
-        ImageButton phone_btn = view.findViewById(R.id.client_item_phone_button);
-        View container = view.findViewById(R.id.client_item_container);
+        TextView supplierName_tv = view.findViewById(R.id.list_item_supplier_name);
+        TextView contact_person_tv = view.findViewById(R.id.list_item_supplier_contact_person);
+        ImageButton phone_btn = view.findViewById(R.id.supplier_item_phone_button);
+        View container = view.findViewById(R.id.supplier_item_container);
 
-        int clientNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
-        int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON);
-        int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_PHONE);
+        int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_NAME);
+        int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON);
+        int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_PHONE);
 
-        String clientName = cursor.getString(clientNameColumnIndex);
+        String supplierName = cursor.getString(supplierNameColumnIndex);
         String contactPerson = cursor.getString(contactPersonColumnIndex);
         final String phone = cursor.getString(phoneColumnIndex);
 
-        supplierName_tv.setText(clientName);
+        supplierName_tv.setText(supplierName);
         contact_person_tv.setText(contactPerson);
         phone_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class ClientCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 mCursor.moveToPosition(position);
-                long id = mCursor.getLong(mCursor.getColumnIndex(InventoryContract.ClientEntry._ID));
+                long id = mCursor.getLong(mCursor.getColumnIndex(InventoryContract.SupplierEntry._ID));
                 mCallback.onItemClicked(id);
             }
         });

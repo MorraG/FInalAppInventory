@@ -17,17 +17,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.user.finalappinventory.adapters.ClientCursorAdapter;
+import com.example.user.finalappinventory.adapters.SupplierCursorAdapter;
 import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 
-public class ClientListFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>, ClientCursorAdapter.ItemClickListener{
+public class SupplierListFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor>, SupplierCursorAdapter.ItemClickListener{
 
     private String mTypeOfRelationship;
-    private ClientCursorAdapter mCursorAdapter;
+    private SupplierCursorAdapter mCursorAdapter;
 
-    public ClientListFragment() {
+    public SupplierListFragment() {
     }
 
     @Nullable
@@ -39,7 +39,7 @@ public class ClientListFragment extends Fragment implements
         getActivity().setTitle(getString(R.string.all_clients, mTypeOfRelationship));
         //get the list of clients from the database
 
-        mCursorAdapter = new ClientCursorAdapter(getActivity(), null, this);
+        mCursorAdapter = new SupplierCursorAdapter(getActivity(), null, this);
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(mCursorAdapter);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
@@ -52,10 +52,10 @@ public class ClientListFragment extends Fragment implements
 
     @Override
     public void onItemClicked(long id) {
-        AddClientFragment addSupplierFrag = new AddClientFragment();
+        AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
         Bundle args = new Bundle();
         args.putString(Costants.RELATION_TYPE, mTypeOfRelationship);
-        Uri currentEnterpriseUri = ContentUris.withAppendedId(InventoryContract.ClientEntry.CONTENT_URI, id);
+        Uri currentEnterpriseUri = ContentUris.withAppendedId(InventoryContract.SupplierEntry.CONTENT_URI, id);
         args.putString(Costants.ENTERPRISE_URI, currentEnterpriseUri.toString());
         addSupplierFrag.setArguments(args);
         getFragmentManager().beginTransaction()
@@ -67,9 +67,9 @@ public class ClientListFragment extends Fragment implements
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String[] projection = {InventoryContract.ClientEntry._ID, InventoryContract.ClientEntry.CLIENT_NAME, InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON, InventoryContract.ClientEntry.CLIENT_PHONE};
+        String[] projection = {InventoryContract.SupplierEntry._ID, InventoryContract.SupplierEntry.SUPPLIER_NAME, InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON, InventoryContract.SupplierEntry.SUPPLIER_PHONE};
         String[] selectionArgs = {mTypeOfRelationship};
-        return new CursorLoader(getActivity(), InventoryContract.ClientEntry.CONTENT_URI,
+        return new CursorLoader(getActivity(), InventoryContract.SupplierEntry.CONTENT_URI,
                 projection,
                 null,
                 selectionArgs, null);

@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.suppliers:{
-                openClientListFragment(Costants.SUPPLIER);
+                openSupplierListFragment(Costants.SUPPLIER);
                 break;
             }
             /*
@@ -279,25 +279,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 break;
             }
-            case R.id.add_client:{
-                AddClientFragment addClientFrag = new AddClientFragment();
+            case R.id.add_supplier:{
+                AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
                 getSupportFragmentManager ().beginTransaction()
-                        .replace(R.id.container, addClientFrag);
+                        .replace(R.id.container, addSupplierFrag)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void openClientListFragment(String relationshipType){
-        ClientListFragment clientListFrag = new ClientListFragment();
+    private void openSupplierListFragment(String relationshipType){
+        SupplierListFragment supplierListFrag = new SupplierListFragment();
         Bundle args = new Bundle();
         args.putString(Costants.RELATION_TYPE, relationshipType);
-        clientListFrag.setArguments(args);
+        supplierListFrag.setArguments(args);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, clientListFrag)
+                .replace(R.id.container, supplierListFrag)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void openClientListFragment(String relationshipType){
+       /* ClientListFragment clientListFrag = new CientListFragment();
+        Bundle args = new Bundle();
+        clientListFrag.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, supplierListFrag)
+                .addToBackStack(null)
+                .commit();*/
     }
 
 

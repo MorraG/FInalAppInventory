@@ -11,17 +11,17 @@ import java.util.ArrayList;
 
 public final class DatabaseUtils {
 
-    public static ArrayList<String> getClientsNames(Context context, String relationshipType){
+    public static ArrayList<String> getSuppliersNames(Context context, String relationshipType){
         ArrayList<String> enterpriseList = new ArrayList<>();
-        String[] projection = {InventoryContract.ClientEntry.CLIENT_NAME};
+        String[] projection = {InventoryContract.SupplierEntry.SUPPLIER_NAME};
         String[] selectionArgs = {relationshipType};
-        Cursor cursor = context.getContentResolver().query(InventoryContract.ClientEntry.CONTENT_URI,
+        Cursor cursor = context.getContentResolver().query(InventoryContract.SupplierEntry.CONTENT_URI,
                 projection,
                 null,
                 null,
                 null);
         while (cursor.moveToNext()) {
-            int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
+            int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_NAME);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             enterpriseList.add(supplierName);
         }

@@ -51,7 +51,7 @@ public class ProductCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 mCursor.moveToPosition(position);
-                long id = mCursor.getLong(mCursor.getColumnIndex(InventoryContract.ClientEntry._ID));
+                long id = mCursor.getLong(mCursor.getColumnIndex(InventoryContract.SupplierEntry._ID));
                 mCallback.onItemClicked(id);
             }
         });

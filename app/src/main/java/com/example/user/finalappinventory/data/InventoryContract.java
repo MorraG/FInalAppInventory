@@ -13,7 +13,7 @@ public class InventoryContract {
 
         public static final String PATH_PRODUCTS = "products";
 
-        static final String PATH_CLIENTS = "clients";
+        static final String PATH_SUPPLIERS = "suppliers";
 
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
@@ -46,40 +46,40 @@ public class InventoryContract {
         public final static String QUANTITY_IN_STOCK = "quantityInStock";
 
         //Type: TEXT
-        public final static String CLIENT_NAME = "clientName";
+        public final static String SUPPLIER_NAME = "supplierName";
 
     }
 
-    public static final class ClientEntry implements BaseColumns {
+    public static final class SupplierEntry implements BaseColumns {
 
         public static final String CONTENT_LIST_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLIENTS;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_SUPPLIERS;
 
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLIENTS;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_SUPPLIERS;
 
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_CLIENTS);
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_SUPPLIERS);
 
         //Type: INTEGER
         public final static String _ID = BaseColumns._ID;
 
         //Type: TEXT
-        public final static String TABLE_NAME = "clients";
+        public final static String TABLE_NAME = "suppliers";
 
         //Type: TEXT
-        public final static String CLIENT_NAME = "clientName";
+        public final static String SUPPLIER_NAME = "supplierName";
 
         //Type: TEXT
-        public final static String CLIENT_ADDRESS = "clientAddress";
+        public final static String SUPPLIER_ADDRESS = "supplierAddress";
 
         //Type: TEXT
-        public final static String CLIENT_EMAIL = "clientEmail";
+        public final static String SUPPLIER_EMAIL = "supplierEmail";
 
         //Type: TEXT
-        public final static String CLIENT_PHONE = "clientPhone";
+        public final static String SUPPLIER_PHONE = "supplierPhone";
 
         //Type: TEXT
-        public final static String CLIENT_CONTACT_PERSON = "clientContactPerson";
+        public final static String SUPPLIER_CONTACT_PERSON = "supplierContactPerson";
 
     }
 }

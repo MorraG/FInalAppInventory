@@ -40,6 +40,7 @@ public final class Costants {
 
     public final static String PRODUCT_NAME = "productName";
     public final static String CLIENT_URI = "clientUri";
+    public final static String SUPPLIER_URI = "supplierUri";
 
     public final static String ENTERPRISE_URI = "enterpriseUri";
 

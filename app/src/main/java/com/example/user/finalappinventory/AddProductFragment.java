@@ -45,24 +45,16 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private EditText productName_et;
     private EditText salePrice_et;
     private EditText quantity_et;
-    private ArrayList<String> clientNames;
-    private String chosenClientName = null;
+    private ArrayList<String> supplierNames;
+    private String chosenSupplierName = null;
     private Uri mCurrentProductUri;
-    private Spinner mClientSpin;
+    private Spinner mSupplierSpin;
     private ArrayAdapter<String> mSpinAdapter;
 
     private Button mButtonDash;
     private Button mButtonPlus;
 
     private int quantityAddProduct;
-
-  /*  click listener for implementation of image
-
-  final DialogInterface.OnClickListener mDialogClickListener = new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int item) {
-            mUsersChoice = item;
-        }
-    };*/
 
     public AddProductFragment() {
         setHasOptionsMenu(true);
@@ -77,9 +69,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         productName_et = rootView.findViewById(R.id.editProductName);
         salePrice_et = rootView.findViewById(R.id.editSalePrice);
         quantity_et = rootView.findViewById(R.id.editQuantity);
-        mClientSpin = rootView.findViewById(R.id.clientSpinner);
+        mSupplierSpin = rootView.findViewById(R.id.supplierSpinner);
         Button save_product_btn = rootView.findViewById(R.id.save_btn);
-        TextView add_supplier_btn = rootView.findViewById(R.id.add_client_btn);
+        TextView add_supplier_btn = rootView.findViewById(R.id.add_supplier_btn);
         mButtonDash = rootView.findViewById(R.id.meno);
         mButtonPlus = rootView.findViewById(R.id.piu);
 
@@ -87,12 +79,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         save_product_btn.setOnClickListener(this);
         add_supplier_btn.setOnClickListener(this);
 
-        //Set the spinner which shows existing client names
-        mClientSpin.setOnItemSelectedListener(this);
-        clientNames = DatabaseUtils.getClientsNames(getActivity(), Costants.CLIENT);
-        mSpinAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, clientNames);
+        //Set the spinner which shows existing supplier names
+        mSupplierSpin.setOnItemSelectedListener(this);
+        supplierNames = DatabaseUtils.getSuppliersNames(getActivity(), Costants.SUPPLIER);
+        mSpinAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, supplierNames);
         mSpinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mClientSpin.setAdapter(mSpinAdapter);
+        mSupplierSpin.setAdapter(mSpinAdapter);
 
         Bundle bundle = getArguments();
         String uriString = null;
@@ -144,9 +136,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(AddProductFragment.this)
-                            .setTarget(rootView.findViewById(R.id.add_client_btn))
-                            .setPrimaryText(getString(R.string.hint_addClient_primary))
-                            .setSecondaryText(getString(R.string.hint_addClient_secondary))
+                            .setTarget(rootView.findViewById(R.id.add_supplier_btn))
+                            .setPrimaryText(getString(R.string.hint_addSupplier_primary))
+                            .setSecondaryText(getString(R.string.hint_addSupplier_secondary))
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                 @Override
                                 public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {
@@ -230,15 +222,15 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 saveProduct();
                 break;
             }
-            case R.id.add_client_btn: {
+            case R.id.add_supplier_btn: {
                 //This button opens a new fragment for adding a new supplier
-                AddClientFragment addClientFrag = new AddClientFragment();
+                AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
                 Bundle args = new Bundle();
                 args.putString(Costants.RELATION_TYPE, Costants.SUPPLIER);
                 args.putString(Costants.REQUEST_CODE, Costants.ADD_PRODUCT_FRAGMENT);
-                addClientFrag.setArguments(args);
+                addSupplierFrag.setArguments(args);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, addClientFrag)
+                        .replace(R.id.container, addSupplierFrag)
                         .addToBackStack(null)
                         .commit();
                 break;
@@ -285,7 +277,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         values.put(InventoryContract.ProductEntry.PRODUCT_NAME, productName);
         values.put(InventoryContract.ProductEntry.SALE_PRICE, salePrice);
         values.put(InventoryContract.ProductEntry.QUANTITY_IN_STOCK, quantityInStock);
-        values.put(InventoryContract.ProductEntry.CLIENT_NAME, chosenClientName);
+        values.put(InventoryContract.ProductEntry.SUPPLIER_NAME, chosenSupplierName);
 
         if (mCurrentProductUri == null) {
             //This is new product entry
@@ -308,7 +300,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        chosenClientName = clientNames.get(position);
+        chosenSupplierName = supplierNames.get(position);
     }
 
     @Override
@@ -331,17 +323,17 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             int productNameColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.PRODUCT_NAME);
             int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.QUANTITY_IN_STOCK);
             int priceColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.SALE_PRICE);
-            int supplierColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.CLIENT_NAME);
+            int supplierColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.SUPPLIER_NAME);
 
             String productName = cursor.getString(productNameColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             float price = cursor.getFloat(priceColumnIndex);
-            String clientName = cursor.getString(supplierColumnIndex);
+            String supplierName = cursor.getString(supplierColumnIndex);
 
             productName_et.setText(productName);
             salePrice_et.setText(String.valueOf(price));
             quantity_et.setText(String.valueOf(quantity));
-            mClientSpin.setSelection(mSpinAdapter.getPosition(clientName));
+            mSupplierSpin.setSelection(mSpinAdapter.getPosition(supplierName));
 
             quantityAddProduct = cursor.getInt(quantityColumnIndex);
 

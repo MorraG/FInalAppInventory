@@ -15,6 +15,7 @@
 
     <string name="new_product">New Product</string>
     <string name="new_client">New Client</string>
+    <string name="new_supplier">New Supplier</string>
     <string name="new_transaction">New Purchase</string>
     <string name="add_product">Add Product</string>
     //MENU DELETE
@@ -31,14 +32,16 @@
     <string name="sale_price">Sale Price:</string>
     <string name="in_stock_alone">In stock:</string>
     <string name="client">Client:</string>
+    <string name="supplier">Supplier:</string>
     <string name="add_client"><u>Add New Client</u></string>
+    <string name="add_supplier"><u>Add New Supplier</u></string>
     <string name="quantity_in_stock">Quantity In Stock:</string>
     <string name="quantity_cannot_be_negative">Quantity cnnot be negative</string>
 
     <string name="quantity">Quantity:</string>
     <string name="price">Price:</string>
-    <string name="hint_addClient_primary">If the client is not already in the list</string>
-    <string name="hint_addClient_secondary">Tap to add new client</string>
+    <string name="hint_addSupplier_primary">If the supplier is not already in the list</string>
+    <string name="hint_addSupplier_secondary">Tap to add new supplier</string>
     <string name="piu">+</string>
     <string name="meno">-</string>
 
@@ -56,6 +59,7 @@
     <string name="successfully_updated">Successfully updated</string>
     <string name="product_name_empty">Product name cannot be empty</string>
     <string name="client_name_empty">Client name cannot be empty</string>
+    <string name="supplier_name_empty">Supplier name cannot be empty</string>
     <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
     <string name="product_saved_successfully">Product saved with row id:</string>
     <string name="error_saving_product">Error with saving product</string>

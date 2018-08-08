@@ -22,18 +22,18 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
                 + InventoryContract.ProductEntry.PRODUCT_NAME + " TEXT NOT NULL, "
                 + InventoryContract.ProductEntry.SALE_PRICE + " REAL DEFAULT 0, "
                 + InventoryContract.ProductEntry.QUANTITY_IN_STOCK + " INTEGER NOT NULL DEFAULT 0, "
-                + InventoryContract.ProductEntry.CLIENT_NAME + " TEXT);";
+                + InventoryContract.ProductEntry.SUPPLIER_NAME + " TEXT);";
 
-        String SQL_CREATE_CLIENTS_TABLE = "CREATE TABLE " + InventoryContract.ClientEntry.TABLE_NAME + " ("
-                + InventoryContract.ClientEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + InventoryContract.ClientEntry.CLIENT_NAME + " TEXT NOT NULL, "
-                + InventoryContract.ClientEntry.CLIENT_PHONE + " TEXT, "
-                + InventoryContract.ClientEntry.CLIENT_ADDRESS + " TEXT, "
-                + InventoryContract.ClientEntry.CLIENT_EMAIL + " TEXT, "
-                + InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON + " TEXT)";
+        String SQL_CREATE_SUPPLIERS_TABLE = "CREATE TABLE " + InventoryContract.SupplierEntry.TABLE_NAME + " ("
+                + InventoryContract.SupplierEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + InventoryContract.SupplierEntry.SUPPLIER_NAME + " TEXT NOT NULL, "
+                + InventoryContract.SupplierEntry.SUPPLIER_PHONE + " TEXT, "
+                + InventoryContract.SupplierEntry.SUPPLIER_ADDRESS + " TEXT, "
+                + InventoryContract.SupplierEntry.SUPPLIER_EMAIL + " TEXT, "
+                + InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON + " TEXT)";
 
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
-        db.execSQL(SQL_CREATE_CLIENTS_TABLE);
+        db.execSQL(SQL_CREATE_SUPPLIERS_TABLE);
     }
 
     @Override

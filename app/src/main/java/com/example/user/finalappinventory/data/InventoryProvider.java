@@ -13,15 +13,15 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.user.finalappinventory.data.InventoryContract.ProductEntry;
-import com.example.user.finalappinventory.data.InventoryContract.ClientEntry;
+import com.example.user.finalappinventory.data.InventoryContract.SupplierEntry;
 
 public class InventoryProvider extends ContentProvider {
 
     private static final int PRODUCTS = 100;
     private static final int PRODUCT_WITH_ID = 101;
 
-    private static final int CLIENTS = 200;
-    private static final int CLIENTS_ID = 201;
+    private static final int SUPPLIERS = 200;
+    private static final int SUPPLIERS_ID = 201;
 
    /* private static final int TRANSACTIONS = 300;
     private static final int TRANSACTIONS_WITH_ID = 301;*/
@@ -42,8 +42,8 @@ public class InventoryProvider extends ContentProvider {
     static {
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS, PRODUCTS);
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS + "/#", PRODUCT_WITH_ID);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS, CLIENTS);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS + "/#", CLIENTS_ID);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_SUPPLIERS, SUPPLIERS);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_SUPPLIERS + "/#", SUPPLIERS_ID);
 
     }
 
@@ -73,9 +73,9 @@ public class InventoryProvider extends ContentProvider {
                         null, null, null);
                 break;
             }
-            case CLIENTS: {
+            case SUPPLIERS: {
                 cursor = database.query(
-                        ClientEntry.TABLE_NAME,   // The table to query
+                        SupplierEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
                         null, // The columns for the WHERE clause
                         null,                  // The values for the WHERE clause
@@ -84,11 +84,11 @@ public class InventoryProvider extends ContentProvider {
                         null);                   // The sort order
                 break;
             }
-            case CLIENTS_ID: {
-                selection = ClientEntry._ID + "=?";
+            case SUPPLIERS_ID: {
+                selection = SupplierEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-                cursor = database.query(ClientEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(SupplierEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, null);
                 break;
             }
@@ -108,10 +108,10 @@ public class InventoryProvider extends ContentProvider {
                 return ProductEntry.CONTENT_LIST_TYPE;
             case PRODUCT_WITH_ID:
                 return ProductEntry.CONTENT_ITEM_TYPE;
-            case CLIENTS:
-                return ClientEntry.CONTENT_LIST_TYPE;
-            case CLIENTS_ID:
-                return ClientEntry.CONTENT_ITEM_TYPE;
+            case SUPPLIERS:
+                return SupplierEntry.CONTENT_LIST_TYPE;
+            case SUPPLIERS_ID:
+                return SupplierEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
@@ -130,8 +130,8 @@ public class InventoryProvider extends ContentProvider {
                 id = database.insert(ProductEntry.TABLE_NAME, null, values);
                 break;
             }
-            case CLIENTS: {
-                id = database.insert(ClientEntry.TABLE_NAME, null, values);
+            case SUPPLIERS: {
+                id = database.insert(SupplierEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
@@ -161,11 +161,11 @@ public class InventoryProvider extends ContentProvider {
                 rowsDeleted = database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
-            case CLIENTS_ID: {
+            case SUPPLIERS_ID: {
                 // Delete a single row given by the ID in the URI
                 selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = database.delete(ClientEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(SupplierEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
 
@@ -198,10 +198,10 @@ public class InventoryProvider extends ContentProvider {
                 rowsUpdated = database.update(ProductEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
-            case CLIENTS_ID: {
-                selection = ClientEntry._ID + "=?";
+            case SUPPLIERS_ID: {
+                selection = SupplierEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsUpdated = database.update(ClientEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = database.update(SupplierEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
 
