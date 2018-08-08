@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,26 +48,19 @@ public class ProductListFragment extends Fragment implements
         getActivity().setTitle(getString(R.string.all_products));
 
         mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
+        // FIND VIEWS
         ListView listView = rootView.findViewById(R.id.list);
-        listView.setAdapter(mCursorAdapter);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
         TextView empty_tv = rootView.findViewById(R.id.empty_text);
+        Button delete_product_btn = rootView.findViewById(R.id.delete_btn);
+
+        //Set adapter , text , view, listener
+        listView.setAdapter(mCursorAdapter);
         empty_tv.setText(R.string.no_products_found);
         listView.setEmptyView(empty_screen);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AddProductFragment addProductFrag = new AddProductFragment();
-                Bundle args = new Bundle();
-                Uri currentProductUri = ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
-                args.putString(Costants.PRODUCT_URI, currentProductUri.toString());
-                addProductFrag.setArguments(args);
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, addProductFrag)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        //delete_product_btn.setOnClickListener();
+
+
         getLoaderManager().initLoader(Costants.PRODUCT_LOADER_ID, null, this);
         return rootView;
     }

@@ -62,7 +62,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private ArrayAdapter<String> mSpinAdapter;
     private int mUsersChoice;
 
-  /*  click listener for implementation of image
+ /*   click listener for implementation of image
 
   final DialogInterface.OnClickListener mDialogClickListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int item) {
@@ -83,7 +83,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         productName_et = rootView.findViewById(R.id.editProductName);
         salePrice_et = rootView.findViewById(R.id.editSalePrice);
         quantity_et = rootView.findViewById(R.id.editQuantity);
-        mClientSpin = rootView.findViewById(R.id.supplierSpinner);
+        mClientSpin = rootView.findViewById(R.id.clientSpinner);
         Button save_product_btn = rootView.findViewById(R.id.save_btn);
         TextView add_supplier_btn = rootView.findViewById(R.id.add_client_btn);
 
@@ -123,8 +123,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(AddProductFragment.this)
                             .setTarget(rootView.findViewById(R.id.add_client_btn))
-                            .setPrimaryText("If the client is not already in the list")
-                            .setSecondaryText("Tap to add new client")
+                            .setPrimaryText(getString(R.string.hint_addClient_primary))
+                            .setSecondaryText(getString(R.string.hint_addClient_secondary))
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                 @Override
                                 public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {

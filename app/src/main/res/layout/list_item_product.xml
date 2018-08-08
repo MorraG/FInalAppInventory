@@ -7,15 +7,24 @@
     android:padding="@dimen/paddingOrMar_S">
 
     <Button
-        android:id="@+id/save_btn2"
+        android:id="@+id/delete_btn"
         style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/paddingOrMar_XXXL"
-        android:gravity="center"
-        android:text="@string/save"
+        android:layout_marginTop="@dimen/paddingOrMar_S"
+        android:text="@string/deleteProduct"
         app:layout_constraintStart_toEndOf="@id/product_item_product_name"
-        tools:layout_editor_absoluteY="@dimen/paddingOrMar_XL" />
+        app:layout_constraintTop_toTopOf="@id/product_item_image"/>
+
+    <View android:id="@+id/product_item_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/paddingOrMar_S"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/product_item_quantity"
+        app:layout_constraintEnd_toStartOf="@id/delete_btn"/>
 
     <TextView
         android:id="@+id/product_item_product_name"

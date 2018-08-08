@@ -34,6 +34,7 @@ public class ProductCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         ViewHolder holder = (ViewHolder) view.getTag();
+        View container = view.findViewById(R.id.product_item_container);
 
         final String productName = cursor.getString(cursor.getColumnIndex(InventoryContract.ProductEntry.PRODUCT_NAME));
         int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContract.ProductEntry.QUANTITY_IN_STOCK));
@@ -42,6 +43,7 @@ public class ProductCursorAdapter extends CursorAdapter {
         holder.productName_tv.setText(productName);
         holder.quantity_tv.setText(mContext.getString(R.string.in_stock, quantity));
         holder.price_tv.setText(NumberFormat.getCurrencyInstance().format(price));
+
 
     }
 

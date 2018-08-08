@@ -2,7 +2,7 @@
     <string name="app_name">FInalAppInventory</string>
 
     //PAGINA PRINCIPALE
-    <string name="no_products_found">No products found. You can begin adding products by clicking on + button</string>
+    <string name="no_products_found">No products found. You can start adding products by clicking on + button</string>
 
     //MENU
     <string name="see_all">SEE ALL:</string>
@@ -30,11 +30,13 @@
     <string name="sale_price">Sale Price:</string>
     <string name="in_stock_alone">In stock:</string>
     <string name="client">Client:</string>
-    <string name="add_client"><u>Add Client</u></string>
+    <string name="add_client"><u>Add New Client</u></string>
     <string name="add_image">Add image:</string>
     <string name="quantity_in_stock">Quantity In Stock:</string>
     <string name="quantity">Quantity:</string>
     <string name="price">Price:</string>
+    <string name="hint_addClient_primary">If the client is not already in the list</string>
+    <string name="hint_addClient_secondary">Tap to add new client</string>
 
     //fragment add client
     <string name="name">Name:</string>
@@ -59,10 +61,12 @@
     <string name="all_products">All products</string>
     <string name="in_stock">In stock: %1$d</string>
     <string name="edit_product">Edit Product</string>
+    <string name="deleteProduct">delete</string>
+
 
     //fragments CLientList
     <string name="all_clients">All %1$ss</string>
-    <string name="no_clients_found">No %1$s found. You can add new %1$ss by clicking \"New %1$s\" from the menu.</string>
+    <string name="no_clients_found">No %1$s found. You can start adding %1$ss by clicking \"New %1$s\" from the menu.</string>
 
     //addCLientFragment
     <string name="frag_add_client">Add %1$s</string>

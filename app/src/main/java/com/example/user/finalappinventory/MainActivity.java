@@ -258,10 +258,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 break;
             }
-            /*case R.id.clients:{
-                openEnterpriseListFragment(Costants.CLIENT);
+            case R.id.clients:{
+                openClientListFragment(Costants.CLIENT);
                 break;
             }
+            /*
             case R.id.transaction_list:{
                 openTransactionListFragment(Costants.TRANSACTION);
                 break;
