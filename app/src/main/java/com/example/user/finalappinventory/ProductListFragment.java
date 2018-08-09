@@ -77,7 +77,8 @@ public class ProductListFragment extends Fragment implements
     public void onItemClicked(long id) {
         AddProductFragment addProductFragment = new AddProductFragment();
         Bundle args = new Bundle();
-        Uri currentProductUri = ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
+        Uri currentProductUri =
+                ContentUris.withAppendedId(InventoryContract.ProductEntry.CONTENT_URI, id);
         args.putString(Costants.PRODUCT_URI, currentProductUri.toString());
         addProductFragment.setArguments(args);
         getFragmentManager().beginTransaction()
@@ -90,8 +91,12 @@ public class ProductListFragment extends Fragment implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
         String[] projection = {
-                InventoryContract.ProductEntry._ID, InventoryContract.ProductEntry.PRODUCT_NAME, InventoryContract.ProductEntry.QUANTITY_IN_STOCK, InventoryContract.ProductEntry.SALE_PRICE};
-        return new CursorLoader(mContext, InventoryContract.ProductEntry.CONTENT_URI, projection, null, null, null);
+                InventoryContract.ProductEntry._ID,
+                InventoryContract.ProductEntry.PRODUCT_NAME,
+                InventoryContract.ProductEntry.QUANTITY_IN_STOCK,
+                InventoryContract.ProductEntry.SALE_PRICE};
+        return new CursorLoader(mContext, InventoryContract.ProductEntry.CONTENT_URI,
+                projection, null, null, null);
     }
 
     @Override

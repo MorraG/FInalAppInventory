@@ -14,7 +14,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -91,12 +93,40 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         if (bundle != null) uriString = bundle.getString(Costants.PRODUCT_URI);
         if (uriString != null) mCurrentProductUri = Uri.parse(uriString);
 
+        //controllo quantità inserita con TextWatcher and Editable class.
+        quantity_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                quantityAddProduct = 0;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() ==0){
+                    quantityAddProduct = 0;
+                } else{
+                    quantityAddProduct = Integer.parseInt(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() ==0){
+                    quantityAddProduct = 0;
+                } else{
+                    quantityAddProduct = Integer.parseInt(quantity_et.getText().toString());
+                }
+
+            }
+        });
+
+
         //Set the title that corresponds to the fragment
         if (mCurrentProductUri == null) {
 
             getActivity().setTitle(getString(R.string.add_product));
             getActivity().invalidateOptionsMenu();
-            quantityAddProduct = 0;
+//            quantityAddProduct = 0;
             mButtonDash.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 

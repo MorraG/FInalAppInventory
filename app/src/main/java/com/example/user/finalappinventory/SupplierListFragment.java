@@ -70,10 +70,9 @@ public class SupplierListFragment extends Fragment implements
     public void onItemClicked(long id) {
         AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
         Bundle args = new Bundle();
-        args.putString(Costants.RELATION_TYPE, mTypeOfRelationship);
-        Uri currentEnterpriseUri =
+        Uri currentSupplierUri =
                 ContentUris.withAppendedId(InventoryContract.SupplierEntry.CONTENT_URI, id);
-        args.putString(Costants.ENTERPRISE_URI, currentEnterpriseUri.toString());
+        args.putString(Costants.SUPPLIER_URI, currentSupplierUri.toString());
         addSupplierFrag.setArguments(args);
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, addSupplierFrag)
@@ -88,11 +87,11 @@ public class SupplierListFragment extends Fragment implements
                 InventoryContract.SupplierEntry.SUPPLIER_NAME,
                 InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
                 InventoryContract.SupplierEntry.SUPPLIER_PHONE};
-        String[] selectionArgs = {mTypeOfRelationship};
         return new CursorLoader(mContext, InventoryContract.SupplierEntry.CONTENT_URI,
                 projection,
                 null,
-                selectionArgs, null);
+                null,
+                null);
     }
 
     @Override
@@ -111,7 +110,7 @@ public class SupplierListFragment extends Fragment implements
         mContext = null;
     }
 
-    // DA QUI tutto quello che riguarda l'operazione di cancellazione prodotto
+    // DA QUI tutto quello che riguarda l'operazione di cancellazione SUPL
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
