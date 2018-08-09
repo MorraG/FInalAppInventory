@@ -55,6 +55,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     private Button mButtonDash;
     private Button mButtonPlus;
+    private Button save_product_btn;
 
     private int quantityAddProduct;
 
@@ -72,7 +73,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         salePrice_et = rootView.findViewById(R.id.editSalePrice);
         quantity_et = rootView.findViewById(R.id.editQuantity);
         mSupplierSpin = rootView.findViewById(R.id.supplierSpinner);
-        Button save_product_btn = rootView.findViewById(R.id.save_btn);
+        save_product_btn = rootView.findViewById(R.id.save_btn);
         TextView add_supplier_btn = rootView.findViewById(R.id.add_supplier_btn);
         mButtonDash = rootView.findViewById(R.id.meno);
         mButtonPlus = rootView.findViewById(R.id.piu);
@@ -87,6 +88,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mSpinAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, supplierNames);
         mSpinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSupplierSpin.setAdapter(mSpinAdapter);
+        save_product_btn.setEnabled(false);
 
         Bundle bundle = getArguments();
         String uriString = null;
@@ -106,6 +108,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     quantityAddProduct = 0;
                 } else{
                     quantityAddProduct = Integer.parseInt(s.toString());
+                }
+
+                if(s.toString().trim().length()==0){
+                    save_product_btn.setEnabled(false);
+                } else {
+                    save_product_btn.setEnabled(true);
                 }
             }
 
@@ -274,6 +282,27 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    //CREATO UN METODO CHE POTEVA FUNZIONARE MA POI DOVE LO CHIAMO AL CLICK DEL BOTTONE CHE DI BASE é DISABILITATO?
+    /*private void checkRequiredFields() {
+        if (
+                !productName_et.getText().toString().isEmpty()
+                &&
+                !quantity_et.getText().toString().isEmpty()
+                &&
+                !salePrice_et.getText().toString().isEmpty()
+
+                ) {
+
+
+
+
+
+            save_product_btn.setEnabled(true);
+        }
+        else {
+            save_product_btn.setEnabled(false);
+        }
+    }*/
 
     private void saveProduct() {
         //Make sure that product name is not null

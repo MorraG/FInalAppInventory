@@ -16,6 +16,8 @@ public final class Costants {
 
     public final static String ADD_PRODUCT_FRAGMENT = "addProductFragment";
 
+    public final static String ADD_SUPPLIER_FRAGMENT = "addSupplierFragment";
+
     public final static String ADD_TRANSACTION_FRAGMENT = "addTransactionFragment";
 
     //Loader ids

@@ -51,8 +51,7 @@ public class SupplierListFragment extends Fragment implements
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
         Bundle bundle = getArguments();
-        mTypeOfRelationship = bundle.getString(Costants.RELATION_TYPE);
-        getActivity().setTitle(getString(R.string.all_clients, mTypeOfRelationship));
+        getActivity().setTitle(getString(R.string.all_supplier));
         //get the list of clients from the database
 
         mCursorAdapter = new SupplierCursorAdapter(getActivity(), null, this);

@@ -69,7 +69,8 @@
     <string name="Successful_deletingSupl">supplier successfully deleted</string>
     <string name="Successful_deletingProd">product successfully deleted</string>
     //fragment productlist
-    <string name="all_products">All products</string>
+    <string name="all_products">All Products</string>
+    <string name="all_supplier">All Supplier</string>
     <string name="in_stock">In stock: %1$d</string>
     <string name="edit_product">Edit Product</string>
     <string name="deleteProduct">delete</string>
