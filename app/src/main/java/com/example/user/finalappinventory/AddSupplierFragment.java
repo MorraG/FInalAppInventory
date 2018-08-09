@@ -138,29 +138,36 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
 
         public void onClick (View v){
 
-            saveSupplier();
+            if(saveSupplier()){
             SupplierListFragment supFrag = new SupplierListFragment();
             Bundle args = new Bundle();
-//            args.putString(Costants.REQUEST_CODE, Costants.ADD_SUPPLIER_FRAGMENT);
             supFrag.setArguments(args);
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, supFrag)
                     .addToBackStack(null)
-                    .commit();
+                    .commit();}
         }
 
 
-        private void saveSupplier() {
+        private boolean saveSupplier() {
 
             String supplierName = supplierName_et.getText().toString().trim();
             if (TextUtils.isEmpty(supplierName)) {
                 Toast.makeText(getActivity(), R.string.supplier_name_empty, Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
 
             String supplierAddress = supplierAddress_et.getText().toString().trim();
+            if (TextUtils.isEmpty(supplierAddress)) {
+                Toast.makeText(getActivity(), R.string.supplier_address_empty, Toast.LENGTH_SHORT).show();
+                return false;
+            }
             String supplierEmail = supplierEmail_et.getText().toString().trim();
             String supplierPhone = supplierPhone_et.getText().toString().trim();
+            if (TextUtils.isEmpty(supplierPhone)) {
+                Toast.makeText(getActivity(), R.string.supplier_phone_empty, Toast.LENGTH_SHORT).show();
+                return false;
+            }
             String contactPerson = supplierContactPerson_et.getText().toString().trim();
 
             ContentValues values = new ContentValues();
@@ -175,16 +182,20 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
                 Uri newUri = getActivity().getContentResolver().insert(InventoryContract.SupplierEntry.CONTENT_URI, values);
                 if (newUri == null) {
                     Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();
+                    return false;
                 } else {
                     Toast.makeText(getActivity(), R.string.enterprise_successfully_saved, Toast.LENGTH_SHORT).show();
+                    return true;
                 }
             } else {
                 // Otherwise this is an existing supplier, so update the entry
                 int rowsAffected = getActivity().getContentResolver().update(mCurrentSupplierUri, values, null, null);
                 if (rowsAffected == 0) {
                     Toast.makeText(getActivity(), R.string.error_updating, Toast.LENGTH_SHORT).show();
+                    return false;
                 } else {
                     Toast.makeText(getActivity(), R.string.successfully_updated, Toast.LENGTH_SHORT).show();
+                    return true;
                 }
             }
         }

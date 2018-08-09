@@ -59,6 +59,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     private int quantityAddProduct;
 
+
     public AddProductFragment() {
         setHasOptionsMenu(true);
     }
@@ -88,7 +89,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mSpinAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, supplierNames);
         mSpinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSupplierSpin.setAdapter(mSpinAdapter);
-        save_product_btn.setEnabled(false);
 
         Bundle bundle = getArguments();
         String uriString = null;
@@ -108,12 +108,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     quantityAddProduct = 0;
                 } else{
                     quantityAddProduct = Integer.parseInt(s.toString());
-                }
-
-                if(s.toString().trim().length()==0){
-                    save_product_btn.setEnabled(false);
-                } else {
-                    save_product_btn.setEnabled(true);
                 }
             }
 
@@ -257,20 +251,18 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         switch (id) {
             case R.id.save_btn: {
                 //This button saves the new product to the database
-                saveProduct();
+                if(saveProduct()){
                 ProductListFragment prodFrag = new ProductListFragment();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, prodFrag)
                         .addToBackStack(null)
-                        .commit();
+                        .commit();}
                 break;
             }
             case R.id.add_supplier_btn: {
                 //This button opens a new fragment for adding a new supplier
                 AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
                 Bundle args = new Bundle();
-                args.putString(Costants.RELATION_TYPE, Costants.SUPPLIER);
-                args.putString(Costants.REQUEST_CODE, Costants.ADD_PRODUCT_FRAGMENT);
                 addSupplierFrag.setArguments(args);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, addSupplierFrag)
@@ -282,58 +274,41 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    //CREATO UN METODO CHE POTEVA FUNZIONARE MA POI DOVE LO CHIAMO AL CLICK DEL BOTTONE CHE DI BASE é DISABILITATO?
-    /*private void checkRequiredFields() {
-        if (
-                !productName_et.getText().toString().isEmpty()
-                &&
-                !quantity_et.getText().toString().isEmpty()
-                &&
-                !salePrice_et.getText().toString().isEmpty()
+    private boolean saveProduct() {
 
-                ) {
-
-
-
-
-
-            save_product_btn.setEnabled(true);
-        }
-        else {
-            save_product_btn.setEnabled(false);
-        }
-    }*/
-
-    private void saveProduct() {
         //Make sure that product name is not null
         String productName = productName_et.getText().toString().trim();
         if (TextUtils.isEmpty(productName)) {
             Toast.makeText(getActivity(), R.string.product_name_empty, Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
+
         //Make sure quantity is a positive integer
+
         int quantityInStock;
+
         try {
+
             quantityInStock = Integer.valueOf(quantity_et.getText().toString().trim());
             if (quantityInStock < 1) {
                 Toast.makeText(getActivity(), R.string.quantity_should_be_positive, Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         } catch (NumberFormatException nfe) {
             Toast.makeText(getActivity(), R.string.quantity_should_be_positive, Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
-
+        //Make sure quantity is positive number
         float salePrice;
         try{
             salePrice = Float.valueOf(salePrice_et.getText().toString().trim());
             if(salePrice < 0){
                 Toast.makeText(getActivity(), R.string.price_should_be_number, Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         } catch (NumberFormatException nfe) {
             Toast.makeText(getActivity(), R.string.price_should_be_number, Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
 
@@ -348,16 +323,20 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             Uri newUri = getActivity().getContentResolver().insert(InventoryContract.ProductEntry.CONTENT_URI, values);
             if (newUri == null) {
                 Toast.makeText(getActivity(), R.string.error_saving_product, Toast.LENGTH_SHORT).show();
+                return false;
             } else {
                 Toast.makeText(getActivity(), getString(R.string.product_saved_successfully), Toast.LENGTH_SHORT).show();
+                return true;
             }
         } else {
             // Otherwise this is an existing product, so update the product
             int rowsAffected = getActivity().getContentResolver().update(mCurrentProductUri, values, null, null);
             if (rowsAffected == 0) {
                 Toast.makeText(getActivity(), R.string.error_saving_product, Toast.LENGTH_SHORT).show();
+                return false;
             } else {
                 Toast.makeText(getActivity(), getString(R.string.product_saved_successfully), Toast.LENGTH_SHORT).show();
+                return true;
             }
         }
     }
