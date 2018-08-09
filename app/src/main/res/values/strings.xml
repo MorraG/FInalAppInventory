@@ -74,6 +74,9 @@
     <string name="edit_product">Edit Product</string>
     <string name="deleteProduct">delete</string>
 
+    // fragment supplierList
+    <string name="edit_supplier">Edit Supplier</string>
+    <string name="deleteSupplier">delete</string>
 
     //fragments CLientList
     <string name="all_clients">All %1$ss</string>

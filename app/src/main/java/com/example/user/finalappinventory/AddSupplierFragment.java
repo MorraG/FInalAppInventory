@@ -2,6 +2,7 @@ package com.example.user.finalappinventory;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,8 +65,16 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
 
             getActivity().setTitle(getString(R.string.add_supplier));
             getActivity().invalidateOptionsMenu();
-
         }
+        else {
+            getActivity().setTitle(getString(R.string.edit_supplier));
+            getLoaderManager().initLoader(Costants.SINGLE_SUPPLIER_LOADER, null, this);
+        }
+
+//        SharedPreferences preferences = getActivity().getSharedPreferences("MyPref", 0);
+//        final SharedPreferences.Editor editor = preferences.edit();
+
+
         return rootView;
 
     }
@@ -158,7 +167,7 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
             values.put(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON, contactPerson);
 
             if (mCurrentSupplierUri == null) {
-                //This is a new supplier or supplier
+                //This is a new supplier entry
                 Uri newUri = getActivity().getContentResolver().insert(InventoryContract.SupplierEntry.CONTENT_URI, values);
                 if (newUri == null) {
                     Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();

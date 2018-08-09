@@ -126,7 +126,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             getActivity().setTitle(getString(R.string.add_product));
             getActivity().invalidateOptionsMenu();
-//            quantityAddProduct = 0;
             mButtonDash.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
@@ -152,7 +151,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 }
             });
-        } else {
+        }
+        else {
             getActivity().setTitle(getString(R.string.edit_product));
             getLoaderManager().initLoader(Costants.SINGLE_PRODUCT_LOADER, null, this);
         }
