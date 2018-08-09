@@ -129,6 +129,11 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
 
         public void onClick (View v){
             saveSupplier();
+            SupplierListFragment prodFrag = new SupplierListFragment();
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, prodFrag)
+                    .addToBackStack(null)
+                    .commit();
         }
 
 

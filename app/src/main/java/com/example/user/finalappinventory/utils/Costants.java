@@ -46,17 +46,8 @@ public final class Costants {
 
     public final static String IS_FAB_CLICKED = "isFabClicked";
 
-    //Provider name for saving the image
 
-    public static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
 
-    //Request codes:
-
-    public static final int REQUEST_IMAGE_CAPTURE = 1;
-
-    public static final int REQUEST_STORAGE_PERMISSION = 2;
-
-    public static final int PICK_IMAGE_REQUEST = 3;
 
     //Keys used for SharedPreferences
 

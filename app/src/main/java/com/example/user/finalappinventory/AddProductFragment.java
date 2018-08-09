@@ -250,6 +250,11 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             case R.id.save_btn: {
                 //This button saves the new product to the database
                 saveProduct();
+                ProductListFragment prodFrag = new ProductListFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, prodFrag)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             }
             case R.id.add_supplier_btn: {
