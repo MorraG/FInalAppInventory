@@ -201,8 +201,13 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String[] projection = {InventoryContract.SupplierEntry._ID, InventoryContract.SupplierEntry.SUPPLIER_NAME, InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
-                InventoryContract.SupplierEntry.SUPPLIER_PHONE, InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, InventoryContract.SupplierEntry.SUPPLIER_EMAIL};
+        String[] projection = {
+                InventoryContract.SupplierEntry._ID,
+                InventoryContract.SupplierEntry.SUPPLIER_NAME,
+                InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
+                InventoryContract.SupplierEntry.SUPPLIER_PHONE,
+                InventoryContract.SupplierEntry.SUPPLIER_ADDRESS,
+                InventoryContract.SupplierEntry.SUPPLIER_EMAIL};
         return new CursorLoader(getActivity(), mCurrentSupplierUri, projection, null, null, null);
     }
 

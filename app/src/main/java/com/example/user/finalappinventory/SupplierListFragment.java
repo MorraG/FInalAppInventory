@@ -125,6 +125,7 @@ public class SupplierListFragment extends Fragment implements
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void openAlertDialogForDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
         builder.setMessage(R.string.AlertDialogForDelete_Question);
@@ -143,6 +144,7 @@ public class SupplierListFragment extends Fragment implements
         builder.create();
         builder.show();
     }
+
     private void deleteSupplier(){
         if(mCurrentSupplierUri != null){
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);

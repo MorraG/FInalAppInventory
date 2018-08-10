@@ -27,6 +27,8 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
     private ConstraintLayout mConstraintLayout;
@@ -35,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FloatingActionButton fab_main, fab_add_product, fab_transaction;
     private boolean fabsInClickedState = false;
     private TextView hint_main_tv, hint_add_item_tv, hint_transaction_tv;
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     private void showSingleFAB() {
         TransitionManager.beginDelayedTransition(mConstraintLayout, new MainActivity.MyTransition());
         hint_add_item_tv.setVisibility(View.GONE);
@@ -309,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openClientListFragment(String relationshipType) {
-       ClientListFragment clientListFrag = new ClientListFragment();
+        ClientListFragment clientListFrag = new ClientListFragment();
         Bundle args = new Bundle();
         args.putString(Costants.RELATION_TYPE, relationshipType);
         clientListFrag.setArguments(args);
