@@ -1,5 +1,6 @@
 package com.example.user.finalappinventory;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,6 +46,7 @@ public class SupplierListFragment extends Fragment implements
     public SupplierListFragment() {
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,16 +54,16 @@ public class SupplierListFragment extends Fragment implements
         View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
         Bundle bundle = getArguments();
         getActivity().setTitle(getString(R.string.all_supplier));
-        //get the list of clients from the database
+        //get the list of suppliers from the database
 
         mCursorAdapter = new SupplierCursorAdapter(getActivity(), null, this);
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(mCursorAdapter);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
         TextView empty_tv = rootView.findViewById(R.id.empty_text);
-        empty_tv.setText(getString(R.string.no_clients_found, mTypeOfRelationship));
+        empty_tv.setText(getString(R.string.no_suppliers_found, mTypeOfRelationship));
         listView.setEmptyView(empty_screen);
-        getLoaderManager().initLoader(Costants.ENTERPRISE_LOADER_ID, null, this);
+        getLoaderManager().initLoader(Costants.SUPPLIER_LOADER, null, this);
         return rootView;
     }
 

@@ -65,177 +65,175 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
 
             getActivity().setTitle(getString(R.string.add_supplier));
             getActivity().invalidateOptionsMenu();
-        }
-        else {
+        } else {
             getActivity().setTitle(getString(R.string.edit_supplier));
-            getLoaderManager().initLoader(Costants.SINGLE_SUPPLIER_LOADER, null, this);
+            getLoaderManager().initLoader(Costants.SUPPLIER_LOADER, null, this);
         }
-
-//        SharedPreferences preferences = getActivity().getSharedPreferences("MyPref", 0);
-//        final SharedPreferences.Editor editor = preferences.edit();
-
 
         return rootView;
 
     }
-        @Override
-        public void onPrepareOptionsMenu (Menu menu){
-            super.onPrepareOptionsMenu(menu);
-            if (mCurrentSupplierUri == null) {
-                MenuItem menuItem = menu.findItem(R.id.action_delete);
-                menuItem.setVisible(false);
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (mCurrentSupplierUri == null) {
+            MenuItem menuItem = menu.findItem(R.id.action_delete);
+            menuItem.setVisible(false);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_with_delete, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_delete) {
+            openAlertDialogForDelete();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openAlertDialogForDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
+        builder.setMessage("Do you want to delete this item from the database?");
+        builder.setPositiveButton("Yes, delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deletesupplier();
+                getActivity().onBackPressed();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+
+    private void deletesupplier() {
+        if (mCurrentSupplierUri != null) {
+            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);
+            // Show a toast message depending on whether or not the delete was successful.
+            if (rowsDeleted == 0) {
+                // If no rows were deleted, then there was an error with the delete.
+                Toast.makeText(getActivity(), "Error during delete",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the delete was successful and we can display a toast.
+                Toast.makeText(getActivity(), "product successfully deleted",
+                        Toast.LENGTH_SHORT).show();
             }
         }
-        @Override
-        public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
-            super.onCreateOptionsMenu(menu, inflater);
-            inflater.inflate(R.menu.menu_with_delete, menu);
-        }
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            if (item.getItemId() == R.id.action_delete) {
-                openAlertDialogForDelete();
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-        private void openAlertDialogForDelete () {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
-            builder.setMessage("Do you want to delete this item from the database?");
-            builder.setPositiveButton("Yes, delete", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    deletesupplier();
-                    getActivity().onBackPressed();
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-
-                }
-            });
-            builder.create();
-            builder.show();
-        }
-
-        private void deletesupplier () {
-            if (mCurrentSupplierUri != null) {
-                int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);
-                // Show a toast message depending on whether or not the delete was successful.
-                if (rowsDeleted == 0) {
-                    // If no rows were deleted, then there was an error with the delete.
-                    Toast.makeText(getActivity(), "Error during delete",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    // Otherwise, the delete was successful and we can display a toast.
-                    Toast.makeText(getActivity(), "product successfully deleted",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
+    }
 
 
-        public void onClick (View v){
+    public void onClick(View v) {
 
-            if(saveSupplier()){
+        if (saveSupplier()) {
             SupplierListFragment supFrag = new SupplierListFragment();
             Bundle args = new Bundle();
             supFrag.setArguments(args);
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, supFrag)
                     .addToBackStack(null)
-                    .commit();}
-        }
-
-
-        private boolean saveSupplier() {
-
-            String supplierName = supplierName_et.getText().toString().trim();
-            if (TextUtils.isEmpty(supplierName)) {
-                Toast.makeText(getActivity(), R.string.supplier_name_empty, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            String supplierAddress = supplierAddress_et.getText().toString().trim();
-            if (TextUtils.isEmpty(supplierAddress)) {
-                Toast.makeText(getActivity(), R.string.supplier_address_empty, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            String supplierEmail = supplierEmail_et.getText().toString().trim();
-            String supplierPhone = supplierPhone_et.getText().toString().trim();
-            if (TextUtils.isEmpty(supplierPhone)) {
-                Toast.makeText(getActivity(), R.string.supplier_phone_empty, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            String contactPerson = supplierContactPerson_et.getText().toString().trim();
-
-            ContentValues values = new ContentValues();
-            values.put(InventoryContract.SupplierEntry.SUPPLIER_NAME, supplierName);
-            values.put(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, supplierAddress);
-            values.put(InventoryContract.SupplierEntry.SUPPLIER_EMAIL, supplierEmail);
-            values.put(InventoryContract.SupplierEntry.SUPPLIER_PHONE, supplierPhone);
-            values.put(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON, contactPerson);
-
-            if (mCurrentSupplierUri == null) {
-                //This is a new supplier entry
-                Uri newUri = getActivity().getContentResolver().insert(InventoryContract.SupplierEntry.CONTENT_URI, values);
-                if (newUri == null) {
-                    Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();
-                    return false;
-                } else {
-                    Toast.makeText(getActivity(), R.string.enterprise_successfully_saved, Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-            } else {
-                // Otherwise this is an existing supplier, so update the entry
-                int rowsAffected = getActivity().getContentResolver().update(mCurrentSupplierUri, values, null, null);
-                if (rowsAffected == 0) {
-                    Toast.makeText(getActivity(), R.string.error_updating, Toast.LENGTH_SHORT).show();
-                    return false;
-                } else {
-                    Toast.makeText(getActivity(), R.string.successfully_updated, Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-            }
-        }
-
-        @NonNull
-        @Override
-        public Loader<Cursor> onCreateLoader ( int id, @Nullable Bundle args){
-        String[] projection = {InventoryContract.SupplierEntry._ID, InventoryContract.SupplierEntry.SUPPLIER_NAME, InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
-                InventoryContract.SupplierEntry.SUPPLIER_PHONE, InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, InventoryContract.SupplierEntry.SUPPLIER_EMAIL};
-            return new CursorLoader(getActivity(), mCurrentSupplierUri, projection, null, null, null);
-        }
-
-        @Override
-        public void onLoadFinished (@NonNull Loader < Cursor > loader, Cursor cursor){
-            if (cursor == null || cursor.getCount() < 1) {
-                return;
-            }
-            if (cursor.moveToFirst()) {
-                int enterpriseNameColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_NAME);
-                int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON);
-                int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_PHONE);
-                int addressColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS);
-                int eMailColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_EMAIL);
-
-                String enterpriseName = cursor.getString(enterpriseNameColumnIndex);
-                String contactPerson = cursor.getString(contactPersonColumnIndex);
-                final String phone = cursor.getString(phoneColumnIndex);
-                String address = cursor.getString(addressColumnIndex);
-                String eMail = cursor.getString(eMailColumnIndex);
-
-                supplierName_et.setText(enterpriseName);
-                supplierAddress_et.setText(address);
-                supplierEmail_et.setText(eMail);
-                supplierPhone_et.setText(phone);
-                supplierContactPerson_et.setText(contactPerson);
-            }
-        }
-
-        @Override
-        public void onLoaderReset (@NonNull Loader < Cursor > loader) {
-
+                    .commit();
         }
     }
+
+
+    private boolean saveSupplier() {
+
+        String supplierName = supplierName_et.getText().toString().trim();
+        if (TextUtils.isEmpty(supplierName)) {
+            Toast.makeText(getActivity(), R.string.supplier_name_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String supplierAddress = supplierAddress_et.getText().toString().trim();
+        if (TextUtils.isEmpty(supplierAddress)) {
+            Toast.makeText(getActivity(), R.string.supplier_address_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        String supplierEmail = supplierEmail_et.getText().toString().trim();
+        String supplierPhone = supplierPhone_et.getText().toString().trim();
+        if (TextUtils.isEmpty(supplierPhone)) {
+            Toast.makeText(getActivity(), R.string.supplier_phone_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        String contactPerson = supplierContactPerson_et.getText().toString().trim();
+
+        ContentValues values = new ContentValues();
+        values.put(InventoryContract.SupplierEntry.SUPPLIER_NAME, supplierName);
+        values.put(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, supplierAddress);
+        values.put(InventoryContract.SupplierEntry.SUPPLIER_EMAIL, supplierEmail);
+        values.put(InventoryContract.SupplierEntry.SUPPLIER_PHONE, supplierPhone);
+        values.put(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON, contactPerson);
+
+        if (mCurrentSupplierUri == null) {
+            //This is a new supplier entry
+            Uri newUri = getActivity().getContentResolver().insert(InventoryContract.SupplierEntry.CONTENT_URI, values);
+            if (newUri == null) {
+                Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                Toast.makeText(getActivity(), R.string.enterprise_successfully_saved, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        } else {
+            // Otherwise this is an existing supplier, so update the entry
+            int rowsAffected = getActivity().getContentResolver().update(mCurrentSupplierUri, values, null, null);
+            if (rowsAffected == 0) {
+                Toast.makeText(getActivity(), R.string.error_updating, Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                Toast.makeText(getActivity(), R.string.successfully_updated, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        String[] projection = {InventoryContract.SupplierEntry._ID, InventoryContract.SupplierEntry.SUPPLIER_NAME, InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
+                InventoryContract.SupplierEntry.SUPPLIER_PHONE, InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, InventoryContract.SupplierEntry.SUPPLIER_EMAIL};
+        return new CursorLoader(getActivity(), mCurrentSupplierUri, projection, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+        if (cursor == null || cursor.getCount() < 1) {
+            return;
+        }
+        if (cursor.moveToFirst()) {
+            int suplNameColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_NAME);
+            int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON);
+            int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_PHONE);
+            int addressColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS);
+            int eMailColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_EMAIL);
+
+            String suplName = cursor.getString(suplNameColumnIndex);
+            String contactPerson = cursor.getString(contactPersonColumnIndex);
+            final String phone = cursor.getString(phoneColumnIndex);
+            String address = cursor.getString(addressColumnIndex);
+            String eMail = cursor.getString(eMailColumnIndex);
+
+            supplierName_et.setText(suplName);
+            supplierAddress_et.setText(address);
+            supplierEmail_et.setText(eMail);
+            supplierPhone_et.setText(phone);
+            supplierContactPerson_et.setText(contactPerson);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
+    }
+}

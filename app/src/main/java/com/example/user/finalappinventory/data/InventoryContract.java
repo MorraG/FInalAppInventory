@@ -15,6 +15,8 @@ public class InventoryContract {
 
         static final String PATH_SUPPLIERS = "suppliers";
 
+        static final String PATH_CLIENTS = "clients";
+
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
     private InventoryContract() {
@@ -80,6 +82,39 @@ public class InventoryContract {
 
         //Type: TEXT
         public final static String SUPPLIER_CONTACT_PERSON = "supplierContactPerson";
+
+    }
+
+    public static final class ClientEntry implements BaseColumns {
+
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLIENTS;
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLIENTS;
+
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_CLIENTS);
+
+        //Type: INTEGER
+        public final static String _ID = BaseColumns._ID;
+
+        //Type: TEXT
+        public final static String TABLE_NAME = "clients";
+
+        //Type: TEXT
+        public final static String CLIENT_NAME = "clientName";
+
+        //Type: TEXT
+        public final static String CLIENT_ADDRESS = "clientAddress";
+
+        //Type: TEXT
+        public final static String CLIENT_EMAIL = "clientEmail";
+
+        //Type: TEXT
+        public final static String CLIENT_PHONE = "clientPhone";
+
+        //Type: TEXT
+        public final static String CLIENT_CONTACT_PERSON = "clientContactPerson";
 
     }
 }

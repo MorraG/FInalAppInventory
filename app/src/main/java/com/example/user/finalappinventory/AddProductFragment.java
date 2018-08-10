@@ -104,18 +104,18 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() ==0){
+                if (s.length() == 0) {
                     quantityAddProduct = 0;
-                } else{
+                } else {
                     quantityAddProduct = Integer.parseInt(s.toString());
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() ==0){
+                if (s.length() == 0) {
                     quantityAddProduct = 0;
-                } else{
+                } else {
                     quantityAddProduct = Integer.parseInt(quantity_et.getText().toString());
                 }
 
@@ -131,12 +131,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             mButtonDash.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    if (quantityAddProduct > 0){
+                    if (quantityAddProduct > 0) {
 
                         quantityAddProduct = quantityAddProduct - 1;
                         quantity_et.setText(String.valueOf(quantityAddProduct));
 
-                    }else{
+                    } else {
 
                         Toast.makeText(getActivity(), getString(R.string.quantity_cannot_be_negative), Toast.LENGTH_SHORT).show();
 
@@ -153,8 +153,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 }
             });
-        }
-        else {
+        } else {
             getActivity().setTitle(getString(R.string.edit_product));
             getLoaderManager().initLoader(Costants.SINGLE_PRODUCT_LOADER, null, this);
         }
@@ -163,7 +162,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         final SharedPreferences.Editor editor = preferences.edit();
 
         //This is for QuickStart. It will be shown only once at the first launch.
-        if(preferences.getInt(Costants.THIRD_TAPPROMPT_IS_SHOWN, 0) == 0) {
+        if (preferences.getInt(Costants.THIRD_TAPPROMPT_IS_SHOWN, 0) == 0) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -204,7 +203,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
             openAlertDialogForDelete();
         }
         return super.onOptionsItemSelected(item);
@@ -229,8 +228,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         builder.show();
     }
 
-    private void deleteProduct(){
-        if(mCurrentProductUri != null){
+    private void deleteProduct() {
+        if (mCurrentProductUri != null) {
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentProductUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
@@ -251,12 +250,13 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         switch (id) {
             case R.id.save_btn: {
                 //This button saves the new product to the database
-                if(saveProduct()){
-                ProductListFragment prodFrag = new ProductListFragment();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, prodFrag)
-                        .addToBackStack(null)
-                        .commit();}
+                if (saveProduct()) {
+                    ProductListFragment prodFrag = new ProductListFragment();
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, prodFrag)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 break;
             }
             case R.id.add_supplier_btn: {
@@ -300,9 +300,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         }
         //Make sure quantity is positive number
         float salePrice;
-        try{
+        try {
             salePrice = Float.valueOf(salePrice_et.getText().toString().trim());
-            if(salePrice < 0){
+            if (salePrice < 0) {
                 Toast.makeText(getActivity(), R.string.price_should_be_number, Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -383,12 +383,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             mButtonDash.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    if (quantityAddProduct > 0){
+                    if (quantityAddProduct > 0) {
 
                         quantityAddProduct = quantityAddProduct - 1;
                         quantity_et.setText(String.valueOf(quantityAddProduct));
 
-                    }else{
+                    } else {
 
                         Toast.makeText(getActivity(), getString(R.string.quantity_cannot_be_negative), Toast.LENGTH_SHORT).show();
 

@@ -28,9 +28,9 @@ public final class Costants {
 
     public final static int TRANSACTION_LOADER_ID = 4567;
 
-    public final static int ENTERPRISE_LOADER_ID = 7894;
+    public final static int SUPPLIER_LOADER = 7894;
 
-    public final static int SINGLE_SUPPLIER_LOADER = 7895;
+    public final static int CLIENT_LOADER = 7895;
 
     //Keys for intent extras
 

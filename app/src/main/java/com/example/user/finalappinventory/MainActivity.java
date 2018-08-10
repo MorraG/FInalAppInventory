@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mConstraintSet2.clone(this, R.layout.fab_clicked_state);
 
         //Find floating actions buttons and hint textviews
-        fab_main =  findViewById(R.id.fab_main);
+        fab_main = findViewById(R.id.fab_main);
         fab_add_product = findViewById(R.id.fab_add_item);
         fab_transaction = findViewById(R.id.fab_transaction);
         hint_main_tv = findViewById(R.id.hint_cancel);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab_transaction.setOnClickListener(this);
 
         //Add product list fragment as the default fragment
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             ProductListFragment productListFrag = new ProductListFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, productListFrag)
@@ -86,24 +86,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         } else {
             fabsInClickedState = savedInstanceState.getBoolean(Costants.IS_FAB_CLICKED);
-            if(fabsInClickedState) showFABs();
+            if (fabsInClickedState) showFABs();
         }
 
         preferences = getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = preferences.edit();
         //This is for QuickStart. It will be shown only once at the first launch.
-        if((preferences.getInt(Costants.FIRST_TAPPROMPT_IS_SHOWN, 0) == 0)){
+        if ((preferences.getInt(Costants.FIRST_TAPPROMPT_IS_SHOWN, 0) == 0)) {
             new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(findViewById(R.id.fab_main))
                     .setPrimaryText("Welcome to your mobile inventory. Let's get started!")
                     .setSecondaryText("Tap the see more options")
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                    {
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                         @Override
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
-                        {
-                            if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
-                            {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
                                 //showFABs();
                             }
                         }
@@ -136,10 +133,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
     }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch(id) {
+        switch (id) {
             case R.id.fab_main: {
                 if (!fabsInClickedState) {
                     showFABs();
@@ -167,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fabsInClickedState ^= true;
     }
 
-    private void showFABs(){
+    private void showFABs() {
         TransitionManager.beginDelayedTransition(mConstraintLayout, new MainActivity.MyTransition());
         hint_add_item_tv.setVisibility(View.VISIBLE);
         hint_transaction_tv.setVisibility(View.VISIBLE);
@@ -182,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }, 500);
 
         //This is for QuickStart. It will be shown only once at the first launch.
-        if(preferences.getInt(Costants.SECOND_TAPPROMPT_IS_SHOWN, 0) == 0){
+        if (preferences.getInt(Costants.SECOND_TAPPROMPT_IS_SHOWN, 0) == 0) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -207,8 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-    private void showSingleFAB(){
+    private void showSingleFAB() {
         TransitionManager.beginDelayedTransition(mConstraintLayout, new MainActivity.MyTransition());
         hint_add_item_tv.setVisibility(View.GONE);
         hint_transaction_tv.setVisibility(View.GONE);
@@ -222,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }, 500);
         //This is for QuickStart. It will be shown only once at the first launch.
-        if(preferences.getInt(Costants.SECOND_TAPPROMPT_IS_SHOWN, 0) == 0){
+        if (preferences.getInt(Costants.SECOND_TAPPROMPT_IS_SHOWN, 0) == 0) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -249,8 +246,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch(id){
-            case R.id.products:{
+        switch (id) {
+            case R.id.products: {
                 ProductListFragment productListFrag = new ProductListFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, productListFrag)
@@ -258,11 +255,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 break;
             }
-            case R.id.clients:{
+            case R.id.clients: {
                 openClientListFragment(Costants.CLIENT);
                 break;
             }
-            case R.id.suppliers:{
+            case R.id.suppliers: {
                 openSupplierListFragment(Costants.SUPPLIER);
                 break;
             }
@@ -271,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 openTransactionListFragment(Costants.TRANSACTION);
                 break;
             }*/
-            case R.id.add_product:{
+            case R.id.add_product: {
                 AddProductFragment addProductFrag = new AddProductFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, addProductFrag)
@@ -279,10 +276,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 break;
             }
-            case R.id.add_supplier:{
+            case R.id.add_supplier: {
                 AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
-                getSupportFragmentManager ().beginTransaction()
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, addSupplierFrag)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            }
+            case R.id.add_client: {
+                AddClientFragment addClientFrag = new AddClientFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, addClientFrag)
                         .addToBackStack(null)
                         .commit();
                 break;
@@ -291,7 +296,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void openSupplierListFragment(String relationshipType){
+
+    private void openSupplierListFragment(String relationshipType) {
         SupplierListFragment supplierListFrag = new SupplierListFragment();
         Bundle args = new Bundle();
         args.putString(Costants.RELATION_TYPE, relationshipType);
@@ -302,14 +308,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .commit();
     }
 
-    private void openClientListFragment(String relationshipType){
-       /* ClientListFragment clientListFrag = new CientListFragment();
+    private void openClientListFragment(String relationshipType) {
+       ClientListFragment clientListFrag = new ClientListFragment();
         Bundle args = new Bundle();
+        args.putString(Costants.RELATION_TYPE, relationshipType);
         clientListFrag.setArguments(args);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, supplierListFrag)
+                .replace(R.id.container, clientListFrag)
                 .addToBackStack(null)
-                .commit();*/
+                .commit();
     }
 
 

@@ -32,8 +32,18 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
                 + InventoryContract.SupplierEntry.SUPPLIER_EMAIL + " TEXT, "
                 + InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON + " TEXT)";
 
+        String SQL_CREATE_CLIENTS_TABLE = "CREATE TABLE " + InventoryContract.ClientEntry.TABLE_NAME + " ("
+                + InventoryContract.ClientEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + InventoryContract.ClientEntry.CLIENT_NAME + " TEXT NOT NULL, "
+                + InventoryContract.ClientEntry.CLIENT_PHONE + " TEXT, "
+                + InventoryContract.ClientEntry.CLIENT_ADDRESS + " TEXT, "
+                + InventoryContract.ClientEntry.CLIENT_EMAIL + " TEXT, "
+                + InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON + " TEXT)";
+                
+
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
         db.execSQL(SQL_CREATE_SUPPLIERS_TABLE);
+        db.execSQL(SQL_CREATE_CLIENTS_TABLE);
     }
 
     @Override

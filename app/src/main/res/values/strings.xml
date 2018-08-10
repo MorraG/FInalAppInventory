@@ -59,8 +59,10 @@
     <string name="successfully_updated">Successfully updated</string>
     <string name="product_name_empty">Product name cannot be empty</string>
     <string name="client_name_empty">Client name cannot be empty</string>
+    <string name="client_phone_empty">Phone number is mandatory</string>
+    <string name="client_address_empty">Address cannot be empty</string>
     <string name="supplier_name_empty">Supplier name cannot be empty</string>
-    <string name="supplier_phone_empty">phone is mandatory</string>
+    <string name="supplier_phone_empty">Phone number is mandatory</string>
     <string name="supplier_address_empty">Address cannot be empty</string>
     <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
     <string name="product_saved_successfully">Product saved with row id:</string>
@@ -70,23 +72,22 @@
     <string name="Error_during_delete">Error during delete</string>
     <string name="Successful_deletingSupl">supplier successfully deleted</string>
     <string name="Successful_deletingProd">product successfully deleted</string>
+    <string name="Successful_deletingClt">client successfully deleted</string>
+
     //fragment productlist
     <string name="all_products">All Products</string>
-    <string name="all_supplier">All Supplier</string>
     <string name="in_stock">In stock: %1$d</string>
     <string name="edit_product">Edit Product</string>
     <string name="deleteProduct">delete</string>
 
-    // fragment supplierList
+    // fragments supplierList
     <string name="edit_supplier">Edit Supplier</string>
     <string name="deleteSupplier">delete</string>
+    <string name="all_supplier">All Supplier</string>
 
-    //fragments CLientList
-    <string name="all_clients">All %1$ss</string>
-    <string name="no_clients_found">No %1$s found. You can start adding %1$ss by clicking \"New %1$s\" from the menu.</string>
-
-    //addCLientFragment
-    <string name="frag_add_client">Add %1$s</string>
-    <string name="edit_client">Edit %1$s</string>
-
+    //fragments ClientList
+    <string name="edit_client">Edit Client</string>
+    <string name="all_clients">All Clients</string>
+    <string name="no_clients_found">No Clients found. You can start adding Clients by clicking "New Client" from the menu.</string>
+    <string name="no_suppliers_found">No Suppliers found. You can start adding Suppliers by clicking "New Supplier" from the menu.</string>
 </resources>
