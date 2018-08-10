@@ -50,7 +50,7 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
         supplierAddress_et = rootView.findViewById(R.id.editSupplierAddress);
         supplierEmail_et = rootView.findViewById(R.id.editSupplierEMail);
         supplierPhone_et = rootView.findViewById(R.id.editSupplierPhone);
-        supplierContactPerson_et = rootView.findViewById(R.id.editContactPerson);
+        supplierContactPerson_et = rootView.findViewById(R.id.SUPPL_editContactPerson);
         Button save_supplier_btn = rootView.findViewById(R.id.save_supplier_btn);
         save_supplier_btn.setOnClickListener(this);
 

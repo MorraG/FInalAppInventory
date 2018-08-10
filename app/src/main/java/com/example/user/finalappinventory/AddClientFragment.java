@@ -50,7 +50,7 @@ public class AddClientFragment extends Fragment implements View.OnClickListener,
         clientAddress_et = rootView.findViewById(R.id.editClientAddress);
         clientEmail_et = rootView.findViewById(R.id.editClientEMail);
         clientPhone_et = rootView.findViewById(R.id.editClientPhone);
-        clientContactPerson_et = rootView.findViewById(R.id.editContactPerson);
+        clientContactPerson_et = rootView.findViewById(R.id.CLT_editContactPerson);
         Button save_client_btn = rootView.findViewById(R.id.save_client_btn);
         save_client_btn.setOnClickListener(this);
 

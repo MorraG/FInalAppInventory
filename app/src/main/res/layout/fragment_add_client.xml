@@ -67,11 +67,11 @@
         android:id="@+id/textView6"
         style="@style/FieldStyle"
         android:text="@string/contact_person"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editContactPersonCLT"
+        app:layout_constraintBaseline_toBaselineOf="@+id/CLT_editContactPerson"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editContactPersonCLT"
+        android:id="@+id/CLT_editContactPerson"
         style="@style/editTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barrier"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@id/editContactPersonCLT"
+        app:layout_constraintTop_toBottomOf="@id/CLT_editContactPerson"
         android:layout_marginTop="@dimen/paddingOrMar_L"/>
 
 </android.support.constraint.ConstraintLayout>
