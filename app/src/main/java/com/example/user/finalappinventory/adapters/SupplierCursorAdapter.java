@@ -1,6 +1,5 @@
 package com.example.user.finalappinventory.adapters;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
