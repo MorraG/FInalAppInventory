@@ -27,47 +27,47 @@ import android.widget.Toast;
 import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 
-public class AddSupplierFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class AddClientFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
-    private EditText supplierName_et;
-    private EditText supplierAddress_et;
-    private EditText supplierEmail_et;
-    private EditText supplierPhone_et;
-    private EditText supplierContactPerson_et;
-    private Uri mCurrentSupplierUri;
+    private EditText clientName_et;
+    private EditText clientAddress_et;
+    private EditText clientEmail_et;
+    private EditText clientPhone_et;
+    private EditText clientContactPerson_et;
+    private Uri mCurrentClientUri;
 
-    public AddSupplierFragment() {
+    public AddClientFragment() {
         setHasOptionsMenu(true);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_supplier, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_client, container, false);
         setHasOptionsMenu(true);
 
-        supplierName_et = rootView.findViewById(R.id.editSupplierName);
-        supplierAddress_et = rootView.findViewById(R.id.editSupplierAddress);
-        supplierEmail_et = rootView.findViewById(R.id.editSupplierEMail);
-        supplierPhone_et = rootView.findViewById(R.id.editSupplierPhone);
-        supplierContactPerson_et = rootView.findViewById(R.id.editContactPerson);
-        Button save_supplier_btn = rootView.findViewById(R.id.save_supplier_btn);
-        save_supplier_btn.setOnClickListener(this);
+        clientName_et = rootView.findViewById(R.id.editClientName);
+        clientAddress_et = rootView.findViewById(R.id.editClientAddress);
+        clientEmail_et = rootView.findViewById(R.id.editClientEMail);
+        clientPhone_et = rootView.findViewById(R.id.editClientPhone);
+        clientContactPerson_et = rootView.findViewById(R.id.editContactPerson);
+        Button save_client_btn = rootView.findViewById(R.id.save_client_btn);
+        save_client_btn.setOnClickListener(this);
 
         Bundle bundle = getArguments();
         String uriString = null;
 
-        if (bundle != null) uriString = bundle.getString(Costants.SUPPLIER_URI);
-        if (uriString != null) mCurrentSupplierUri = Uri.parse(uriString);
+        if (bundle != null) uriString = bundle.getString(Costants.CLIENT_URI);
+        if (uriString != null) mCurrentClientUri = Uri.parse(uriString);
 
         //Set the title that corresponds to the fragment
-        if (mCurrentSupplierUri == null) {
+        if (mCurrentClientUri == null) {
 
-            getActivity().setTitle(getString(R.string.add_supplier));
+            getActivity().setTitle(getString(R.string.add_client));
             getActivity().invalidateOptionsMenu();
         } else {
-            getActivity().setTitle(getString(R.string.edit_supplier));
-            getLoaderManager().initLoader(Costants.SUPPLIER_LOADER, null, this);
+            getActivity().setTitle(getString(R.string.edit_client));
+            getLoaderManager().initLoader(Costants.CLIENT_LOADER, null, this);
         }
 
         return rootView;
@@ -77,7 +77,7 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if (mCurrentSupplierUri == null) {
+        if (mCurrentClientUri == null) {
             MenuItem menuItem = menu.findItem(R.id.action_delete);
             menuItem.setVisible(false);
         }
@@ -103,7 +103,7 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
         builder.setPositiveButton("Yes, delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                deletesupplier();
+                deleteclient();
                 getActivity().onBackPressed();
             }
         });
@@ -116,9 +116,9 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
         builder.show();
     }
 
-    private void deletesupplier() {
-        if (mCurrentSupplierUri != null) {
-            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);
+    private void deleteclient() {
+        if (mCurrentClientUri != null) {
+            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentClientUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
@@ -126,7 +126,7 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(getActivity(), R.string.Successful_deletingSupl,
+                Toast.makeText(getActivity(), R.string.Successful_deletingClt,
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -135,49 +135,49 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
 
     public void onClick(View v) {
 
-        if (saveSupplier()) {
-            SupplierListFragment supFrag = new SupplierListFragment();
+        if (saveClient()) {
+            ClientListFragment cltFrag = new ClientListFragment();
             Bundle args = new Bundle();
-            supFrag.setArguments(args);
+            cltFrag.setArguments(args);
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, supFrag)
+                    .replace(R.id.container, cltFrag)
                     .addToBackStack(null)
                     .commit();
         }
     }
 
 
-    private boolean saveSupplier() {
+    private boolean saveClient() {
 
-        String supplierName = supplierName_et.getText().toString().trim();
-        if (TextUtils.isEmpty(supplierName)) {
-            Toast.makeText(getActivity(), R.string.supplier_name_empty, Toast.LENGTH_SHORT).show();
+        String clientName = clientName_et.getText().toString().trim();
+        if (TextUtils.isEmpty(clientName)) {
+            Toast.makeText(getActivity(), R.string.client_name_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        String supplierAddress = supplierAddress_et.getText().toString().trim();
-        if (TextUtils.isEmpty(supplierAddress)) {
-            Toast.makeText(getActivity(), R.string.supplier_address_empty, Toast.LENGTH_SHORT).show();
+        String clientAddress = clientAddress_et.getText().toString().trim();
+        if (TextUtils.isEmpty(clientAddress)) {
+            Toast.makeText(getActivity(), R.string.client_address_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
-        String supplierEmail = supplierEmail_et.getText().toString().trim();
-        String supplierPhone = supplierPhone_et.getText().toString().trim();
-        if (TextUtils.isEmpty(supplierPhone)) {
-            Toast.makeText(getActivity(), R.string.supplier_phone_empty, Toast.LENGTH_SHORT).show();
+        String clientEmail = clientEmail_et.getText().toString().trim();
+        String clientPhone = clientPhone_et.getText().toString().trim();
+        if (TextUtils.isEmpty(clientPhone)) {
+            Toast.makeText(getActivity(), R.string.client_phone_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
-        String contactPerson = supplierContactPerson_et.getText().toString().trim();
+        String contactPerson = clientContactPerson_et.getText().toString().trim();
 
         ContentValues values = new ContentValues();
-        values.put(InventoryContract.SupplierEntry.SUPPLIER_NAME, supplierName);
-        values.put(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, supplierAddress);
-        values.put(InventoryContract.SupplierEntry.SUPPLIER_EMAIL, supplierEmail);
-        values.put(InventoryContract.SupplierEntry.SUPPLIER_PHONE, supplierPhone);
-        values.put(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON, contactPerson);
+        values.put(InventoryContract.ClientEntry.CLIENT_NAME, clientName);
+        values.put(InventoryContract.ClientEntry.CLIENT_ADDRESS, clientAddress);
+        values.put(InventoryContract.ClientEntry.CLIENT_EMAIL, clientEmail);
+        values.put(InventoryContract.ClientEntry.CLIENT_PHONE, clientPhone);
+        values.put(InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON, contactPerson);
 
-        if (mCurrentSupplierUri == null) {
-            //This is a new supplier entry
-            Uri newUri = getActivity().getContentResolver().insert(InventoryContract.SupplierEntry.CONTENT_URI, values);
+        if (mCurrentClientUri == null) {
+            //This is a new client entry
+            Uri newUri = getActivity().getContentResolver().insert(InventoryContract.ClientEntry.CONTENT_URI, values);
             if (newUri == null) {
                 Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();
                 return false;
@@ -186,8 +186,8 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
                 return true;
             }
         } else {
-            // Otherwise this is an existing supplier, so update the entry
-            int rowsAffected = getActivity().getContentResolver().update(mCurrentSupplierUri, values, null, null);
+            // Otherwise this is an existing client, so update the entry
+            int rowsAffected = getActivity().getContentResolver().update(mCurrentClientUri, values, null, null);
             if (rowsAffected == 0) {
                 Toast.makeText(getActivity(), R.string.error_updating, Toast.LENGTH_SHORT).show();
                 return false;
@@ -201,9 +201,14 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String[] projection = {InventoryContract.SupplierEntry._ID, InventoryContract.SupplierEntry.SUPPLIER_NAME, InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
-                InventoryContract.SupplierEntry.SUPPLIER_PHONE, InventoryContract.SupplierEntry.SUPPLIER_ADDRESS, InventoryContract.SupplierEntry.SUPPLIER_EMAIL};
-        return new CursorLoader(getActivity(), mCurrentSupplierUri, projection, null, null, null);
+        String[] projection = {
+                InventoryContract.ClientEntry._ID,
+                InventoryContract.ClientEntry.CLIENT_NAME,
+                InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON,
+                InventoryContract.ClientEntry.CLIENT_PHONE,
+                InventoryContract.ClientEntry.CLIENT_ADDRESS,
+                InventoryContract.ClientEntry.CLIENT_EMAIL};
+        return new CursorLoader(getActivity(), mCurrentClientUri, projection, null, null, null);
     }
 
     @Override
@@ -212,23 +217,23 @@ public class AddSupplierFragment extends Fragment implements View.OnClickListene
             return;
         }
         if (cursor.moveToFirst()) {
-            int suplNameColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_NAME);
-            int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON);
-            int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_PHONE);
-            int addressColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_ADDRESS);
-            int eMailColumnIndex = cursor.getColumnIndex(InventoryContract.SupplierEntry.SUPPLIER_EMAIL);
+            int cltNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
+            int contactPersonColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON);
+            int phoneColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_PHONE);
+            int addressColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_ADDRESS);
+            int eMailColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_EMAIL);
 
-            String suplName = cursor.getString(suplNameColumnIndex);
+            String suplName = cursor.getString(cltNameColumnIndex);
             String contactPerson = cursor.getString(contactPersonColumnIndex);
             final String phone = cursor.getString(phoneColumnIndex);
             String address = cursor.getString(addressColumnIndex);
             String eMail = cursor.getString(eMailColumnIndex);
 
-            supplierName_et.setText(suplName);
-            supplierAddress_et.setText(address);
-            supplierEmail_et.setText(eMail);
-            supplierPhone_et.setText(phone);
-            supplierContactPerson_et.setText(contactPerson);
+            clientName_et.setText(suplName);
+            clientAddress_et.setText(address);
+            clientEmail_et.setText(eMail);
+            clientPhone_et.setText(phone);
+            clientContactPerson_et.setText(contactPerson);
         }
     }
 

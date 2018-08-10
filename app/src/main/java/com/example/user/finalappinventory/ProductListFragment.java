@@ -131,15 +131,15 @@ public class ProductListFragment extends Fragment implements
     }
     private void openAlertDialogForDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
-        builder.setMessage("Do you want to delete this item from the database?");
-        builder.setPositiveButton("Yes, delete", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.AlertDialogForDelete_Question);
+        builder.setPositiveButton(R.string.AlertDialogForDelete_Confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deleteProduct();
                 getActivity().onBackPressed();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.AlertDialogForDelete_Cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
             }

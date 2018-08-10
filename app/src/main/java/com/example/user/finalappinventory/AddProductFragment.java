@@ -234,11 +234,11 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
-                Toast.makeText(getActivity(), "Error during delete",
+                Toast.makeText(getActivity(), R.string.Error_during_delete,
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(getActivity(), "product successfully deleted",
+                Toast.makeText(getActivity(), R.string.Successful_deletingProd,
                         Toast.LENGTH_SHORT).show();
             }
         }

@@ -25,17 +25,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.user.finalappinventory.adapters.SupplierCursorAdapter;
+import com.example.user.finalappinventory.adapters.ClientCursorAdapter;
 import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 
-public class SupplierListFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>, SupplierCursorAdapter.ItemClickListener {
+public class ClientListFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor>, ClientCursorAdapter.ItemClickListener {
 
     private String mTypeOfRelationship;
-    private SupplierCursorAdapter mCursorAdapter;
+    private ClientCursorAdapter mCursorAdapter;
     private Context mContext;
-    private Uri mCurrentSupplierUri;
+    private Uri mCurrentClientUri;
 
     @Override
     public void onAttach(Context context) {
@@ -43,7 +43,7 @@ public class SupplierListFragment extends Fragment implements
         mContext = context;
     }
 
-    public SupplierListFragment() {
+    public ClientListFragment() {
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -53,30 +53,30 @@ public class SupplierListFragment extends Fragment implements
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
         Bundle bundle = getArguments();
-        getActivity().setTitle(getString(R.string.all_supplier));
-        //get the list of suppliers from the database
+        getActivity().setTitle(getString(R.string.all_clients));
+        //get the list of clients from the database
 
-        mCursorAdapter = new SupplierCursorAdapter(getActivity(), null, this);
+        mCursorAdapter = new ClientCursorAdapter(getActivity(), null, this);
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(mCursorAdapter);
         ConstraintLayout empty_screen = rootView.findViewById(R.id.empty_view);
         TextView empty_tv = rootView.findViewById(R.id.empty_text);
-        empty_tv.setText(getString(R.string.no_suppliers_found, mTypeOfRelationship));
+        empty_tv.setText(getString(R.string.no_clients_found, mTypeOfRelationship));
         listView.setEmptyView(empty_screen);
-        getLoaderManager().initLoader(Costants.SUPPLIER_LOADER, null, this);
+        getLoaderManager().initLoader(Costants.CLIENT_LOADER, null, this);
         return rootView;
     }
 
     @Override
     public void onItemClicked(long id) {
-        AddSupplierFragment addSupplierFrag = new AddSupplierFragment();
+        AddClientFragment addClientFrag = new AddClientFragment();
         Bundle args = new Bundle();
-        Uri currentSupplierUri =
-                ContentUris.withAppendedId(InventoryContract.SupplierEntry.CONTENT_URI, id);
-        args.putString(Costants.SUPPLIER_URI, currentSupplierUri.toString());
-        addSupplierFrag.setArguments(args);
+        Uri currentClientUri =
+                ContentUris.withAppendedId(InventoryContract.ClientEntry.CONTENT_URI, id);
+        args.putString(Costants.CLIENT_URI, currentClientUri.toString());
+        addClientFrag.setArguments(args);
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, addSupplierFrag)
+                .replace(R.id.container, addClientFrag)
                 .addToBackStack(null)
                 .commit();
     }
@@ -84,11 +84,11 @@ public class SupplierListFragment extends Fragment implements
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String[] projection = {InventoryContract.SupplierEntry._ID,
-                InventoryContract.SupplierEntry.SUPPLIER_NAME,
-                InventoryContract.SupplierEntry.SUPPLIER_CONTACT_PERSON,
-                InventoryContract.SupplierEntry.SUPPLIER_PHONE};
-        return new CursorLoader(mContext, InventoryContract.SupplierEntry.CONTENT_URI,
+        String[] projection = {InventoryContract.ClientEntry._ID,
+                InventoryContract.ClientEntry.CLIENT_NAME,
+                InventoryContract.ClientEntry.CLIENT_CONTACT_PERSON,
+                InventoryContract.ClientEntry.CLIENT_PHONE};
+        return new CursorLoader(mContext, InventoryContract.ClientEntry.CONTENT_URI,
                 projection,
                 null,
                 null,
@@ -111,7 +111,7 @@ public class SupplierListFragment extends Fragment implements
         mContext = null;
     }
 
-    // DA QUI tutto quello che riguarda l'operazione di cancellazione SUPL
+    // DA QUI tutto quello che riguarda l'operazione di cancellazione CLT
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -120,22 +120,23 @@ public class SupplierListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
             openAlertDialogForDelete();
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void openAlertDialogForDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
         builder.setMessage(R.string.AlertDialogForDelete_Question);
         builder.setPositiveButton(R.string.AlertDialogForDelete_Confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                deleteSupplier();
+                deleteClient();
                 getActivity().onBackPressed();
             }
         });
-        builder.setNegativeButton(R.string.AlertDialogForDelete_Cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
             }
@@ -143,9 +144,10 @@ public class SupplierListFragment extends Fragment implements
         builder.create();
         builder.show();
     }
-    private void deleteSupplier(){
-        if(mCurrentSupplierUri != null){
-            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);
+
+    private void deleteClient() {
+        if (mCurrentClientUri != null) {
+            int rowsDeleted = getActivity().getContentResolver().delete(mCurrentClientUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
@@ -153,10 +155,9 @@ public class SupplierListFragment extends Fragment implements
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(getActivity(), R.string.Successful_deletingSupl,
+                Toast.makeText(getActivity(), R.string.Successful_deletingClt,
                         Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 }

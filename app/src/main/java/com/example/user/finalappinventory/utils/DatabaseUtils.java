@@ -39,9 +39,9 @@ public final class DatabaseUtils {
                 null,
                 null);
         while (cursor.moveToNext()) {
-            int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
-            String supplierName = cursor.getString(supplierNameColumnIndex);
-            clientList.add(supplierName);
+            int clientNameColumnIndex = cursor.getColumnIndex(InventoryContract.ClientEntry.CLIENT_NAME);
+            String clientName = cursor.getString(clientNameColumnIndex);
+            clientList.add(clientName);
         }
         cursor.close();
         return clientList;
