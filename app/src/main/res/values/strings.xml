@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FInalAppInventory</string>
+    <string name="app_name">Quick-Pick Inventory</string>
 
     //PAGINA PRINCIPALE
     <string name="no_products_found">No products found. You can start adding products by clicking on + button</string>
@@ -76,6 +76,12 @@
     <string name="AlertDialogForDelete_Question">Do you want to delete this item from the database?</string>
     <string name="AlertDialogForDelete_Confirm">Yes, delete</string>
     <string name="AlertDialogForDelete_Cancel">Cancel</string>
+    //DB operations error:
+    <string name="update_db_not_supported">Update is not supported for</string>
+    <string name="delete_db_not_supported">Delete is not supported for</string>
+    <string name="insert_db_not_supported">Insertion is not supported for</string>
+
+
     //fragment productlist
     <string name="all_products">All Products</string>
     <string name="in_stock">In stock: %1$d</string>
@@ -92,4 +98,16 @@
     <string name="all_clients">All Clients</string>
     <string name="no_clients_found">No Clients found. You can start adding Clients by clicking "New Client" from the menu.</string>
     <string name="no_suppliers_found">No Suppliers found. You can start adding Suppliers by clicking "New Supplier" from the menu.</string>
+
+    //fragments New Purchase
+    <string name="new_purchase">New Purchase</string>
+    <string name="select_product">Select Product: </string>
+    <string name="select_client">Select Client: </string>
+    <string name="select_quantity">Select Quantity: </string>
+    <string name="select_date">Select Date: </string>
+    <string name="buy">Buy</string>
+
+
+
+
 </resources>

@@ -17,6 +17,8 @@ public class InventoryContract {
 
         static final String PATH_CLIENTS = "clients";
 
+        static final String PATH_PURCHASES = "purchases";
+
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
     private InventoryContract() {
@@ -116,5 +118,33 @@ public class InventoryContract {
         //Type: TEXT
         public final static String CLIENT_CONTACT_PERSON = "clientContactPerson";
 
+    }
+
+    public static final class PurchaseEntry implements BaseColumns {
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PURCHASES;
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PURCHASES;
+
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_PURCHASES);
+
+        //Type: INTEGER
+        public final static String _ID = BaseColumns._ID;
+
+        //Type: TEXT
+        public final static String TABLE_NAME = "purchases";
+
+        //Type: TEXT
+        public final static String CLIENT_NAME = "clientName";
+
+        //Type: TEXT
+        public final static String SUPPLIER_NAME = "supplierName";
+
+        //Type: TEXT
+        public final static String PURCHASE_DATE = "purchaseDate";
+
+        //Type: INTEGER
+        public final static String QUANTITY_PURCHASED = "quantityPurchased";
     }
 }

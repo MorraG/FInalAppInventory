@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/FieldStyle"
+        android:text="@string/select_product"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/productSpinner"
+        style="@style/editTextStyle"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/FieldStyle"
+        android:layout_marginStart="24dp"
+        android:text="@string/select_client"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/clientSpinner"
+        style="@style/editTextStyle"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/productSpinner" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/FieldStyle"
+        android:text="@string/select_quantity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editQuantity"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editQuantity"
+        style="@style/editTextStyle"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@id/meno"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/clientSpinner" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/FieldStyle"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/select_date"
+        app:layout_constraintBottom_toBottomOf="@+id/buyBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/buyBtn"
+        style="@style/editTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/editQuantity" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="textView2,textView3,textView4,textView5"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="91dp" />
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buyBtn"
+        android:layout_marginTop="@dimen/paddingOrMar_L"/>
+
+    <Button
+        android:id="@+id/meno"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/meno"
+        app:layout_constraintBottom_toTopOf="@id/buyBtn"
+        app:layout_constraintEnd_toEndOf="@id/clientSpinner"
+        app:layout_constraintLeft_toRightOf="@+id/editQuantity" />
+
+    <Button
+        android:id="@+id/piu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/piu"
+        app:layout_constraintBottom_toTopOf="@id/meno"
+        app:layout_constraintStart_toStartOf="@id/meno" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+

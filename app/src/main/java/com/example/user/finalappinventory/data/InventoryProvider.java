@@ -15,6 +15,7 @@ import android.util.Log;
 import com.example.user.finalappinventory.data.InventoryContract.ProductEntry;
 import com.example.user.finalappinventory.data.InventoryContract.SupplierEntry;
 import com.example.user.finalappinventory.data.InventoryContract.ClientEntry;
+import com.example.user.finalappinventory.data.InventoryContract.PurchaseEntry;
 
 public class InventoryProvider extends ContentProvider {
 
@@ -27,8 +28,8 @@ public class InventoryProvider extends ContentProvider {
     private static final int CLIENTS = 300;
     private static final int CLIENTS_ID = 301;
 
-   /* private static final int TRANSACTIONS = 300;
-    private static final int TRANSACTIONS_WITH_ID = 301;*/
+    private static final int PURCHASES = 400;
+    private static final int PURCHASES_WITH_ID = 401;
 
     private InventoryDBHelper mDbHelper;
 
@@ -50,6 +51,8 @@ public class InventoryProvider extends ContentProvider {
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_SUPPLIERS + "/#", SUPPLIERS_ID);
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS, CLIENTS);
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS + "/#", CLIENTS_ID);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PURCHASES, PURCHASES);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PURCHASES + "/#", PURCHASES_WITH_ID);
     }
 
     @Nullable
@@ -116,6 +119,25 @@ public class InventoryProvider extends ContentProvider {
                         null, null, null);
                 break;
             }
+            case PURCHASES: {
+                cursor = database.query(
+                        ProductEntry.TABLE_NAME,   // The table to query
+                        projection,            // The columns to return
+                        null, // The columns for the WHERE clause
+                        null,                  // The values for the WHERE clause
+                        null,                  // Don't group the rows
+                        null,                  // Don't filter by row groups
+                        null);                   // The sort order
+                break;
+            }
+            case PURCHASES_WITH_ID:  {
+                selection = PurchaseEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+
+                cursor = database.query(ClientEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, null);
+                break;
+            }
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
@@ -140,6 +162,10 @@ public class InventoryProvider extends ContentProvider {
                 return ClientEntry.CONTENT_LIST_TYPE;
             case CLIENTS_ID:
                 return ClientEntry.CONTENT_ITEM_TYPE;
+            case PURCHASES:
+                return PurchaseEntry.CONTENT_LIST_TYPE;
+            case PURCHASES_WITH_ID:
+                return ProductEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
@@ -164,6 +190,10 @@ public class InventoryProvider extends ContentProvider {
             }
             case CLIENTS: {
                 id = database.insert(ClientEntry.TABLE_NAME, null, values);
+                break;
+            }
+            case PURCHASES: {
+                id = database.insert(PurchaseEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
@@ -201,6 +231,13 @@ public class InventoryProvider extends ContentProvider {
                 break;
             }
             case CLIENTS_ID: {
+                // Delete a single row given by the ID in the URI
+                selection = ClientEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowsDeleted = database.delete(ClientEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            }
+            case PURCHASES_WITH_ID: {
                 // Delete a single row given by the ID in the URI
                 selection = ClientEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
@@ -256,7 +293,16 @@ public class InventoryProvider extends ContentProvider {
                 rowsUpdated = database.update(ClientEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
-
+            case PURCHASES: {
+                rowsUpdated = database.update(ClientEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
+            case PURCHASES_WITH_ID: {
+                selection = ProductEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowsUpdated = database.update(PurchaseEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
