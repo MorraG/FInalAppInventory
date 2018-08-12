@@ -146,5 +146,8 @@ public class InventoryContract {
 
         //Type: INTEGER
         public final static String QUANTITY_PURCHASED = "quantityPurchased";
+
+        //Type: REAL
+        public final static String SALE_PRICE = "purchaseSalePrice";
     }
 }

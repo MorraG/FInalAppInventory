@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if ((preferences.getInt(Costants.FIRST_TAPPROMPT_IS_SHOWN, 0) == 0)) {
             new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(findViewById(R.id.fab_main))
+                    .setBackgroundColour(getResources().getColor(R.color.colorPrimary))
                     .setPrimaryText("Welcome to your mobile inventory. Let's get started!")
                     .setSecondaryText("Tap the see more options")
                     .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(MainActivity.this)
                             .setTarget(findViewById(R.id.fab_add_item))
+                            .setBackgroundColour(getResources().getColor(R.color.colorPrimary))
                             .setPrimaryText("Add your first product")
                             .setSecondaryText("Tap to enter your first product")
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
@@ -224,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(MainActivity.this)
                             .setTarget(findViewById(R.id.fab_add_item))
+                            .setBackgroundColour(getResources().getColor(R.color.colorPrimary))
                             .setPrimaryText("Add your first product")
                             .setSecondaryText("Tap to enter your first product")
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {

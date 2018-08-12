@@ -168,6 +168,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(AddProductFragment.this)
                             .setTarget(rootView.findViewById(R.id.add_supplier_btn))
+                            .setBackgroundColour(getResources().getColor(R.color.colorPrimary))
                             .setPrimaryText(getString(R.string.hint_addSupplier_primary))
                             .setSecondaryText(getString(R.string.hint_addSupplier_secondary))
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {

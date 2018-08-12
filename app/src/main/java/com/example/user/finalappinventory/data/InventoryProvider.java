@@ -121,7 +121,7 @@ public class InventoryProvider extends ContentProvider {
             }
             case PURCHASES: {
                 cursor = database.query(
-                        ProductEntry.TABLE_NAME,   // The table to query
+                        PurchaseEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
                         null, // The columns for the WHERE clause
                         null,                  // The values for the WHERE clause
@@ -134,7 +134,7 @@ public class InventoryProvider extends ContentProvider {
                 selection = PurchaseEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-                cursor = database.query(ClientEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(PurchaseEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, null);
                 break;
             }
@@ -165,7 +165,7 @@ public class InventoryProvider extends ContentProvider {
             case PURCHASES:
                 return PurchaseEntry.CONTENT_LIST_TYPE;
             case PURCHASES_WITH_ID:
-                return ProductEntry.CONTENT_ITEM_TYPE;
+                return PurchaseEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
@@ -239,9 +239,9 @@ public class InventoryProvider extends ContentProvider {
             }
             case PURCHASES_WITH_ID: {
                 // Delete a single row given by the ID in the URI
-                selection = ClientEntry._ID + "=?";
+                selection = PurchaseEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = database.delete(ClientEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(PurchaseEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default:
@@ -294,11 +294,11 @@ public class InventoryProvider extends ContentProvider {
                 break;
             }
             case PURCHASES: {
-                rowsUpdated = database.update(ClientEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = database.update(PurchaseEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
             case PURCHASES_WITH_ID: {
-                selection = ProductEntry._ID + "=?";
+                selection = PurchaseEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsUpdated = database.update(PurchaseEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
