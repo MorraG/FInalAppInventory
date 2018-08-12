@@ -1,7 +1,6 @@
 package com.example.user.finalappinventory.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -14,6 +13,7 @@ import com.example.user.finalappinventory.R;
 import com.example.user.finalappinventory.data.InventoryContract;
 
 import java.text.NumberFormat;
+
 
 public class ProductCursorAdapter extends CursorAdapter {
 
@@ -28,6 +28,7 @@ public class ProductCursorAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View v = LayoutInflater.from(context).inflate(R.layout.list_item_product, parent, false);
         ViewHolder holder = new ViewHolder(v);
+
         v.setTag(holder);
         return v;
     }

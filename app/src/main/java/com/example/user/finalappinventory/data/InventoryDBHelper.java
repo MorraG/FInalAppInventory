@@ -43,7 +43,7 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
         String SQL_CREATE_PURCHASE_TABLE = "CREATE TABLE " + InventoryContract.PurchaseEntry.TABLE_NAME + " ("
                 + InventoryContract.PurchaseEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + InventoryContract.PurchaseEntry.CLIENT_NAME + " TEXT, "
-                + InventoryContract.PurchaseEntry.SUPPLIER_NAME + " TEXT, "
+                + InventoryContract.PurchaseEntry.PRODUCT_NAME + " TEXT, "
                 + InventoryContract.PurchaseEntry.PURCHASE_DATE + " TEXT, "
                 + InventoryContract.PurchaseEntry.QUANTITY_PURCHASED + "  INTEGER NOT NULL DEFAULT 0, "
                 + InventoryContract.PurchaseEntry.SALE_PRICE + " REAL DEFAULT 0) ";

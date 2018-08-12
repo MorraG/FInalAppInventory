@@ -139,7 +139,7 @@ public class InventoryContract {
         public final static String CLIENT_NAME = "clientName";
 
         //Type: TEXT
-        public final static String SUPPLIER_NAME = "supplierName";
+        public final static String PRODUCT_NAME = "productName";
 
         //Type: TEXT
         public final static String PURCHASE_DATE = "purchaseDate";
