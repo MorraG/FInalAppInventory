@@ -11,7 +11,7 @@
     <string name="products">Products</string>
     <string name="clients">Clients</string>
     <string name="suppliers">Suppliers</string>
-    <string name="transactions">Transactions</string>
+    <string name="purchases">Purchases</string>
 
     <string name="new_product">New Product</string>
     <string name="new_client">New Client</string>
@@ -65,6 +65,8 @@
     <string name="supplier_phone_empty">Phone number is mandatory</string>
     <string name="supplier_address_empty">Address cannot be empty</string>
     <string name="no_supplier_chosen">You didn\'t chose a supplier</string>
+    <string name="no_client_chosen">You didn\'t chose a client</string>
+    <string name="no_product_chosen">You didn\'t chose a product</string>
     <string name="product_saved_successfully">Product saved with row id:</string>
     <string name="error_saving_product">Error with saving product</string>
     <string name="quantity_should_be_positive">Quantity should be a positive integer</string>
@@ -76,6 +78,9 @@
     <string name="AlertDialogForDelete_Question">Do you want to delete this item from the database?</string>
     <string name="AlertDialogForDelete_Confirm">Yes, delete</string>
     <string name="AlertDialogForDelete_Cancel">Cancel</string>
+    <string name="purchase_date_empty">Date cannot be empty</string>
+    <string name="purchase_price_empty">Price cannot be empty</string>
+
     //DB operations error:
     <string name="update_db_not_supported">Update is not supported for</string>
     <string name="delete_db_not_supported">Delete is not supported for</string>
@@ -106,6 +111,8 @@
     <string name="select_quantity">Select Quantity: </string>
     <string name="select_date">Select Date: </string>
     <string name="buy">Buy</string>
+    <string name="edit_purchase">Edit Purchase</string>
+    <string name="deletePurchase">delete</string>
 
 
 

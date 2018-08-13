@@ -8,11 +8,8 @@ public final class Costants {
 
     public final static String SUPPLIER = "Supplier";
 
-    public final static String TRANSACTION = "Transaction";
+    public final static String  PRODUCT = "Product";
 
-    public final static String DELIVERY = "delivery";
-
-    public final static String ACQUISITION = "acquisition";
 
     public final static String ADD_PRODUCT_FRAGMENT = "addProductFragment";
 
@@ -26,11 +23,16 @@ public final class Costants {
 
     public final static int SINGLE_PRODUCT_LOADER = 1235;
 
-    public final static int TRANSACTION_LOADER_ID = 4567;
+
+
 
     public final static int SUPPLIER_LOADER = 7894;
 
     public final static int CLIENT_LOADER = 7895;
+
+    public final static int PURCHASE_LOADER = 7896;
+
+
 
     //Keys for intent extras
 
@@ -44,7 +46,7 @@ public final class Costants {
     public final static String CLIENT_URI = "clientUri";
     public final static String SUPPLIER_URI = "supplierUri";
 
-    public final static String ENTERPRISE_URI = "enterpriseUri";
+    public final static String PURCHASE_URI = "purchaseUri";
 
     public final static String IS_FAB_CLICKED = "isFabClicked";
 

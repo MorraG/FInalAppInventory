@@ -47,10 +47,28 @@ public final class DatabaseUtils {
         return clientList;
     }
 
-    public static Cursor mergeTables(Context context, long id){
+
+    public static ArrayList<String> getProductsNames(Context context){
+        ArrayList<String> productList = new ArrayList<>();
+        String[] projection = {InventoryContract.ProductEntry.PRODUCT_NAME};
+        Cursor cursor = context.getContentResolver().query(InventoryContract.ProductEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+        while (cursor.moveToNext()) {
+            int clientNameColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.PRODUCT_NAME);
+            String productName = cursor.getString(clientNameColumnIndex);
+            productList.add(productName);
+        }
+        cursor.close();
+        return productList;
+    }
+
+   /* public static Cursor mergeTables(Context context, long id){
         InventoryDBHelper dbHelper = new InventoryDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] selectionArgs = {String.valueOf(id)};
         return db.rawQuery("SELECT products.productName, products.clientName, clients.clientPhone FROM products INNER JOIN clients ON (products.supplierName = clients.clientName AND products._ID=?)", selectionArgs);
-    }
+    }*/
 }

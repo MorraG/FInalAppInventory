@@ -9,18 +9,17 @@
         android:title="@string/see_all">
         <menu>
             <item
+                android:id="@+id/purchases_list"
+                android:title="@string/purchases" />
+            <item
                 android:id="@+id/products"
                 android:title="@string/products" />
             <item
-                android:id="@+id/suppliers"
-                android:title="@string/suppliers" />
-            <item
                 android:id="@+id/clients"
                 android:title="@string/clients" />
-
             <item
-                android:id="@+id/transaction_list"
-                android:title="@string/transactions" />
+                android:id="@+id/suppliers"
+                android:title="@string/suppliers" />
         </menu>
     </item>
 
@@ -29,7 +28,7 @@
         android:title="@string/add">
         <menu>
             <item
-                android:id="@+id/new_transaction"
+                android:id="@+id/new_purchase"
                 android:title="@string/new_transaction"/>
             <item
                 android:id="@+id/add_product"

@@ -294,6 +294,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 break;
             }
+            case R.id.new_purchase: {
+                AddClientFragment addClientFrag = new AddClientFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, addClientFrag)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

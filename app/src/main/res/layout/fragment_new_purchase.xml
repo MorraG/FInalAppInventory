@@ -101,7 +101,7 @@
         tools:layout_editor_absoluteX="91dp" />
 
     <Button
-        android:id="@+id/save_btn"
+        android:id="@+id/buy_btn"
         style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
