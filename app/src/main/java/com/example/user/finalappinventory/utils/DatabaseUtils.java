@@ -48,7 +48,7 @@ public final class DatabaseUtils {
     }
 
 
-    public static ArrayList<String> getProductsNames(Context context){
+    public static ArrayList<String> getProductsNames(Context context, String product){
         ArrayList<String> productList = new ArrayList<>();
         String[] projection = {InventoryContract.ProductEntry.PRODUCT_NAME};
         Cursor cursor = context.getContentResolver().query(InventoryContract.ProductEntry.CONTENT_URI,

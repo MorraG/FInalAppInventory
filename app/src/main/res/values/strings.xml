@@ -52,6 +52,14 @@
     <string name="phone">Phone:</string>
     <string name="contact_person">Contact person:</string>
 
+    //fragments New Purchase
+    <string name="new_purchase">New Purchase</string>
+    <string name="select_product">Select Product: </string>
+    <string name="select_client">Select Client: </string>
+    <string name="select_quantity">Select Quantity: </string>
+    <string name="select_date">Select Date: </string>
+    <string name="buy">Buy</string>
+
     //operations e validator
     <string name="enterprise_successfully_saved">Entry is successfully saved</string>
     <string name="error_updating">Error updating</string>
@@ -97,23 +105,19 @@
     <string name="edit_supplier">Edit Supplier</string>
     <string name="deleteSupplier">delete</string>
     <string name="all_supplier">All Supplier</string>
+    <string name="no_suppliers_found">No Suppliers found. You can start adding Suppliers by clicking "New Supplier" from the menu.</string>
 
     //fragments ClientList
     <string name="edit_client">Edit Client</string>
     <string name="all_clients">All Clients</string>
     <string name="no_clients_found">No Clients found. You can start adding Clients by clicking "New Client" from the menu.</string>
-    <string name="no_suppliers_found">No Suppliers found. You can start adding Suppliers by clicking "New Supplier" from the menu.</string>
 
-    //fragments New Purchase
-    <string name="new_purchase">New Purchase</string>
-    <string name="select_product">Select Product: </string>
-    <string name="select_client">Select Client: </string>
-    <string name="select_quantity">Select Quantity: </string>
-    <string name="select_date">Select Date: </string>
-    <string name="buy">Buy</string>
+
+    //fragments PurchaseList
     <string name="edit_purchase">Edit Purchase</string>
+    <string name="all_purchases">All Purchases</string>
+    <string name="no_purchases_found">No Purchases found. You can start adding Purchases by clicking "New Purchases" from the menu.</string>
     <string name="deletePurchase">delete</string>
-
 
 
 

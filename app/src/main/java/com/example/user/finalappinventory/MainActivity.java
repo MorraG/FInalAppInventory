@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ConstraintSet mConstraintSet1;
     private FloatingActionButton fab_main, fab_add_product, fab_transaction;
     private boolean fabsInClickedState = false;
-    private TextView hint_main_tv, hint_add_item_tv, hint_transaction_tv;
+    private TextView hint_main_tv, hint_add_item_tv, hint_purchase_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab_add_product = findViewById(R.id.fab_add_item);
         fab_transaction = findViewById(R.id.fab_transaction);
         hint_main_tv = findViewById(R.id.hint_cancel);
-        hint_transaction_tv = findViewById(R.id.hint_purchase);
+        hint_purchase_tv = findViewById(R.id.hint_purchase);
         hint_add_item_tv = findViewById(R.id.hint_add_product);
 
         //Set click listeners on fabs
@@ -156,12 +156,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showSingleFAB();
                 break;
             }
-//            case R.id.fab_transaction: {
-//                openAddTransactionFragment(Costants.ACQUISITION);
-//                showSingleFAB();
-//                break;
-//
-//            }
+            case R.id.fab_purchase: {
+                NewPurchaseFragment newpurchaseFrag = new NewPurchaseFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, newpurchaseFrag)
+                        .addToBackStack(null)
+                        .commit();
+                showSingleFAB();
+                break;
+            }
         }
         fabsInClickedState ^= true;
     }
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showFABs() {
         TransitionManager.beginDelayedTransition(mConstraintLayout, new MainActivity.MyTransition());
         hint_add_item_tv.setVisibility(View.VISIBLE);
-        hint_transaction_tv.setVisibility(View.VISIBLE);
+        hint_purchase_tv.setVisibility(View.VISIBLE);
         hint_main_tv.setVisibility(View.VISIBLE);
         mConstraintSet2.applyTo(mConstraintLayout);
         new Handler().postDelayed(new Runnable() {
@@ -209,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showSingleFAB() {
         TransitionManager.beginDelayedTransition(mConstraintLayout, new MainActivity.MyTransition());
         hint_add_item_tv.setVisibility(View.GONE);
-        hint_transaction_tv.setVisibility(View.GONE);
+        hint_purchase_tv.setVisibility(View.GONE);
         hint_main_tv.setVisibility(View.GONE);
         mConstraintSet1.applyTo(mConstraintLayout);
         new Handler().postDelayed(new Runnable() {
@@ -265,9 +268,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 openSupplierListFragment(Costants.SUPPLIER);
                 break;
             }
-            /*
-            case R.id.transaction_list:{
-                openTransactionListFragment(Costants.TRANSACTION);
+            /* TODO insert here the purchase_list
+            case R.id.purchases:{
+                openTransactionListFragment(Costants.PURCHASES);
                 break;
             }*/
             case R.id.add_product: {
@@ -295,9 +298,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.new_purchase: {
-                AddClientFragment addClientFrag = new AddClientFragment();
+                NewPurchaseFragment newpurchaseFrag = new NewPurchaseFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, addClientFrag)
+                        .replace(R.id.container, newpurchaseFrag)
                         .addToBackStack(null)
                         .commit();
                 break;

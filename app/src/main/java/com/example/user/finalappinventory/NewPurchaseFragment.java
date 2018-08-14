@@ -288,7 +288,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
 
         if (mCurrentPurchaseUri == null) {
             //This is a new purchase entry
-            Uri newUri = getActivity().getContentResolver().insert(InventoryContract.ClientEntry.CONTENT_URI, values);
+            Uri newUri = getActivity().getContentResolver().insert(InventoryContract.PurchaseEntry.CONTENT_URI, values);
             if (newUri == null) {
                 Toast.makeText(getActivity(), R.string.error_saving, Toast.LENGTH_SHORT).show();
                 return false;
@@ -319,7 +319,8 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         Toast.makeText(getActivity(), R.string.no_client_chosen, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+    //TODO insert The OnItemSelected for Products
+    /*@Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         chosenProductName = productNames.get(position);
     }
@@ -327,18 +328,18 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         Toast.makeText(getActivity(), R.string.no_product_chosen, Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-       /* String[] projection = {
+       String[] projection = {
                 InventoryContract.PurchaseEntry._ID,
                 InventoryContract.PurchaseEntry.CLIENT_NAME,
                 InventoryContract.PurchaseEntry.PRODUCT_NAME,
                 InventoryContract.PurchaseEntry.QUANTITY_PURCHASED,
                 InventoryContract.PurchaseEntry.SALE_PRICE,
-                InventoryContract.PurchaseEntry.PURCHASE_DATE};*/
+                InventoryContract.PurchaseEntry.PURCHASE_DATE};
         return new CursorLoader(getActivity(), mCurrentPurchaseUri, projection, null, null, null);
     }
 
@@ -361,11 +362,11 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             float price = cursor.getFloat(priceColumnIndex);
             String date = cursor.getString(dateColumnIndex);
 
-            productName_et.setText(productName);
             price_et.setText(String.valueOf(price));
             quantity_et.setText(String.valueOf(quantity));
             mClientSpin.setSelection(mSpinAdapterClt.getPosition(clientName));
-            mProductSpin.setSelection(mSpinAdapterPrt.getPosition(clientName));
+            mProductSpin.setSelection(mSpinAdapterPrt.getPosition(productName));
+            date_et.setText(String.valueOf(date));
 
             quantityAddProduct = cursor.getInt(quantityColumnIndex);
 
