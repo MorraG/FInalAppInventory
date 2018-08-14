@@ -25,7 +25,7 @@
         app:useCompatPadding="true" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_purchase"
+        android:id="@+id/fab_newPurchase"
         android:layout_width="@dimen/paddingOrMar_XXXL"
         android:layout_height="@dimen/paddingOrMar_XXXL"
         android:layout_marginBottom="@dimen/paddingOrMar_L"
@@ -47,8 +47,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/new_transaction"
-        app:layout_constraintEnd_toEndOf="@+id/fab_purchase"
+        android:text="@string/new_purchase"
+        app:layout_constraintEnd_toEndOf="@+id/fab_newPurchase"
         app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
     <TextView

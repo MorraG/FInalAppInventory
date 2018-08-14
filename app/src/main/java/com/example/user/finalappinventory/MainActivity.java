@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Find floating actions buttons and hint textviews
         fab_main = findViewById(R.id.fab_main);
         fab_add_product = findViewById(R.id.fab_add_item);
-        fab_transaction = findViewById(R.id.fab_transaction);
+        fab_transaction = findViewById(R.id.fab_newPurchase);
         hint_main_tv = findViewById(R.id.hint_cancel);
         hint_purchase_tv = findViewById(R.id.hint_purchase);
         hint_add_item_tv = findViewById(R.id.hint_add_product);
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showSingleFAB();
                 break;
             }
-            case R.id.fab_purchase: {
+            case R.id.fab_newPurchase: {
                 NewPurchaseFragment newpurchaseFrag = new NewPurchaseFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, newpurchaseFrag)
@@ -268,11 +268,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 openSupplierListFragment(Costants.SUPPLIER);
                 break;
             }
-            /* TODO insert here the purchase_list
-            case R.id.purchases:{
-                openTransactionListFragment(Costants.PURCHASES);
+
+            case R.id.purchases_list:{
+                openPurchasesListFragment(Costants.PURCHASE);
                 break;
-            }*/
+            }
             case R.id.add_product: {
                 AddProductFragment addProductFrag = new AddProductFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -298,9 +298,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.new_purchase: {
-                NewPurchaseFragment newpurchaseFrag = new NewPurchaseFragment();
+                NewPurchaseFragment newPurchaseFrag = new NewPurchaseFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, newpurchaseFrag)
+                        .replace(R.id.container, newPurchaseFrag)
                         .addToBackStack(null)
                         .commit();
                 break;
@@ -333,16 +333,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-//    private void openTransactionListFragment(String transaction){
-//        AddTransactionFragment transactionFrag = new AddTransactionFragment();
-//        Bundle args = new Bundle();
-//        args.putString(Costants.TRANSACTION, transaction);
-//        transactionFrag.setArguments(args);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.container, transactionFrag)
-//                .addToBackStack(null)
-//                .commit();
-//    }
+    private void openPurchasesListFragment(String transaction){
+        PurchaseListFragment purchaseListFrag = new PurchaseListFragment();
+        Bundle args = new Bundle();
+        args.putString(Costants.PURCHASE, transaction);
+        purchaseListFrag.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, purchaseListFrag)
+                .addToBackStack(null)
+                .commit();
+    }
 
     //Custom transition used during the transition of constraint sets
     static private class MyTransition extends TransitionSet {

@@ -16,7 +16,7 @@
     <string name="new_product">New Product</string>
     <string name="new_client">New Client</string>
     <string name="new_supplier">New Supplier</string>
-    <string name="new_transaction">New Purchase</string>
+    <string name="new_purchase">New Purchase</string>
     <string name="add_product">Add Product</string>
     //MENU DELETE
     <string name="delete">Delete</string>
@@ -53,7 +53,6 @@
     <string name="contact_person">Contact person:</string>
 
     //fragments New Purchase
-    <string name="new_purchase">New Purchase</string>
     <string name="select_product">Select Product: </string>
     <string name="select_client">Select Client: </string>
     <string name="select_quantity">Select Quantity: </string>

@@ -10,6 +10,7 @@ public final class Costants {
 
     public final static String  PRODUCT = "Product";
 
+    public final static String  PURCHASE= "Purchase";
 
     public final static String ADD_PRODUCT_FRAGMENT = "addProductFragment";
 
@@ -34,9 +35,7 @@ public final class Costants {
 
 
 
-    //Keys for intent extras
-
-    public final static String REQUEST_CODE = "requestCode";
+    //Keys
 
     public final static String PRODUCT_URI = "productUri";
 
@@ -49,7 +48,6 @@ public final class Costants {
     public final static String PURCHASE_URI = "purchaseUri";
 
     public final static String IS_FAB_CLICKED = "isFabClicked";
-
 
 
 

@@ -29,7 +29,7 @@
         <menu>
             <item
                 android:id="@+id/new_purchase"
-                android:title="@string/new_transaction"/>
+                android:title="@string/new_purchase"/>
             <item
                 android:id="@+id/add_product"
                 android:title="@string/new_product" />

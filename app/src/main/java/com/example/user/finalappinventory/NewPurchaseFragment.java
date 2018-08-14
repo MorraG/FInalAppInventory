@@ -169,7 +169,6 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             getActivity().setTitle(getString(R.string.edit_purchase));
             getLoaderManager().initLoader(Costants.PURCHASE_LOADER, null, this);
         }
-        //TODO Find shared preferences into Add Product, bisogna capire che fa.
 
         return rootView;
 
@@ -319,7 +318,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         Toast.makeText(getActivity(), R.string.no_client_chosen, Toast.LENGTH_SHORT).show();
     }
 
-    //TODO insert The OnItemSelected for Products
+    //TODO Non posso replicare OnItemSelected for Products , trovare una soluzione alternativa per far funzionare spinner Prodotti
     /*@Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         chosenProductName = productNames.get(position);
@@ -358,7 +357,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             String productName = cursor.getString(productNameColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             String clientName = cursor.getString(clientColumnIndex);
-            // Temporary TODO
+            // Temporary TODO temporanee variabili per price and date
             float price = cursor.getFloat(priceColumnIndex);
             String date = cursor.getString(dateColumnIndex);
 

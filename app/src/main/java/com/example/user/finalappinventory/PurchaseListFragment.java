@@ -116,7 +116,7 @@ public class PurchaseListFragment extends Fragment implements
         mContext = null;
     }
 
-    // DA QUI tutto quello che riguarda l'operazione di cancellazione prodotto
+    // DA QUI tutto quello che riguarda l'operazione di cancellazione acquisto
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
