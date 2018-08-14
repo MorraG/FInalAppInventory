@@ -368,7 +368,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         Toast.makeText(getActivity(), R.string.no_client_chosen, Toast.LENGTH_SHORT).show();
     }
 
-    //TODO Non posso replicare OnItemSelected for Products , trovare una soluzione alternativa per far funzionare spinner Prodotti
+    //TODO Non posso replicare OnItemSelected for Products , serve una soluzione alternativa per far funzionare spinner Prodotti
     /*@Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         chosenProductName = productNames.get(position);
