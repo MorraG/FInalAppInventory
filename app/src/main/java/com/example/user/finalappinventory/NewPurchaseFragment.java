@@ -46,7 +46,7 @@ import java.util.Locale;
 
 public class NewPurchaseFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener,
-        LoaderManager.LoaderCallbacks<Cursor>{
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     //elem needed declaration
     private Spinner mProductSpin;
@@ -86,8 +86,6 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         setHasOptionsMenu(true);
 
 
-
-
         //Find views
         mClientSpin = rootView.findViewById(R.id.clientSpinner);
         mProductSpin = rootView.findViewById(R.id.productSpinner);
@@ -120,7 +118,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         };
 
         // onclick - popup datepicker
-        date_et.setOnClickListener(new View.OnClickListener(){
+        date_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -130,7 +128,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             }
         });
 
-            //Set the spinner which shows existing client names
+        //Set the spinner which shows existing client names
         mClientSpin.setOnItemSelectedListener(this);
         clientNames = DatabaseUtils.getClientsNames(getActivity(), Costants.CLIENT);
         mSpinAdapterClt = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, clientNames);
@@ -217,6 +215,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         return rootView;
 
     }
+
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -313,14 +312,13 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         }
 
 
-
         String purchaseDate = date_et.getText().toString().trim();
         if (TextUtils.isEmpty(purchaseDate)) {
             Toast.makeText(getActivity(), R.string.purchase_date_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        /// TODO TEMPORARY VALIDATOR FOR PRICE - It would fill in automatic when the product is chosen
+        /// TODO VALIDATOR FOR PRICE - It would fill in automatic when the product is chosen
         String purchasePirce = price_et.getText().toString().trim();
         if (TextUtils.isEmpty(purchasePirce)) {
             Toast.makeText(getActivity(), R.string.purchase_price_empty, Toast.LENGTH_SHORT).show();
@@ -382,7 +380,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-       String[] projection = {
+        String[] projection = {
                 InventoryContract.PurchaseEntry._ID,
                 InventoryContract.PurchaseEntry.CLIENT_NAME,
                 InventoryContract.PurchaseEntry.PRODUCT_NAME,
