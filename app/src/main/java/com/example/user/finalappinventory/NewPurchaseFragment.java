@@ -1,6 +1,8 @@
 package com.example.user.finalappinventory;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,6 +17,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -26,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,11 +39,14 @@ import com.example.user.finalappinventory.data.InventoryContract;
 import com.example.user.finalappinventory.utils.Costants;
 import com.example.user.finalappinventory.utils.DatabaseUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class NewPurchaseFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener,
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>{
 
     //elem needed declaration
     private Spinner mProductSpin;
@@ -60,6 +67,12 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     private Button mButtonPlus;
     private Button buy_btn;
 
+    //declaration elem for datapicker
+    final Calendar myCalendar = Calendar.getInstance();
+    String dateFormat = "dd.MM.yyyy";
+    DatePickerDialog.OnDateSetListener date;
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+
     private int quantityAddProduct;
 
     public NewPurchaseFragment() {
@@ -69,8 +82,11 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_new_purchase, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_new_purchase, container, false);
         setHasOptionsMenu(true);
+
+
+
 
         //Find views
         mClientSpin = rootView.findViewById(R.id.clientSpinner);
@@ -86,7 +102,35 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         //Set click listeners on buttons
         buy_btn.setOnClickListener(this);
 
-        //Set the spinner which shows existing client names
+
+        // init - set date to current date
+        long currentdate = System.currentTimeMillis();
+        String dateString = sdf.format(currentdate);
+        date_et.setText(dateString);
+
+        // set calendar date and update editDate
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateDate();
+            }
+        };
+
+        // onclick - popup datepicker
+        date_et.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+            //Set the spinner which shows existing client names
         mClientSpin.setOnItemSelectedListener(this);
         clientNames = DatabaseUtils.getClientsNames(getActivity(), Costants.CLIENT);
         mSpinAdapterClt = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, clientNames);
@@ -215,6 +259,10 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         builder.show();
     }
 
+    private void updateDate() {
+        date_et.setText(sdf.format(myCalendar.getTime()));
+    }
+
     private void deleteProduct() {
         if (mCurrentPurchaseUri != null) {
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentPurchaseUri, null, null);
@@ -265,18 +313,20 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         }
 
 
-        /// TODO TEMPORARY VALIDATOR FOR DATE AND PRICE - FOR DATE I WOULD LIKE INSERT DATA PICKER, FOR PRICE It would fill in automatic when the product is chosen
+
         String purchaseDate = date_et.getText().toString().trim();
         if (TextUtils.isEmpty(purchaseDate)) {
             Toast.makeText(getActivity(), R.string.purchase_date_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        /// TODO TEMPORARY VALIDATOR FOR PRICE - It would fill in automatic when the product is chosen
         String purchasePirce = price_et.getText().toString().trim();
         if (TextUtils.isEmpty(purchasePirce)) {
             Toast.makeText(getActivity(), R.string.purchase_price_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
-        /////////
+
 
         ContentValues values = new ContentValues();
         values.put(InventoryContract.PurchaseEntry.CLIENT_NAME, chosenClientName);
@@ -357,9 +407,11 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             String productName = cursor.getString(productNameColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             String clientName = cursor.getString(clientColumnIndex);
-            // Temporary TODO temporanee variabili per price and date
-            float price = cursor.getFloat(priceColumnIndex);
             String date = cursor.getString(dateColumnIndex);
+
+            // Temporary TODO temporanea variabile per price
+            float price = cursor.getFloat(priceColumnIndex);
+
 
             price_et.setText(String.valueOf(price));
             quantity_et.setText(String.valueOf(quantity));
