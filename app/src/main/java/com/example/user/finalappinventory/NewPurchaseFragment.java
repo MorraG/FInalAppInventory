@@ -318,7 +318,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             return false;
         }
 
-        /// TODO VALIDATOR FOR PRICE - It would fill in automatic when the product is chosen
+        /// TODO FOR PRICE EDIT TEXT - It would fill edit text in automatic when the product is chosen
         String purchasePirce = price_et.getText().toString().trim();
         if (TextUtils.isEmpty(purchasePirce)) {
             Toast.makeText(getActivity(), R.string.purchase_price_empty, Toast.LENGTH_SHORT).show();
