@@ -138,7 +138,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         //Set the spinner which shows existing product names
         mProductSpin.setOnItemSelectedListener(this);
         productNames = DatabaseUtils.getProductsNames(getActivity(), Costants.PRODUCT);
-        mSpinAdapterPrt = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, clientNames);
+        mSpinAdapterPrt = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, productNames);
         mSpinAdapterPrt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mProductSpin.setAdapter(mSpinAdapterPrt);
 
@@ -356,15 +356,14 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        chosenClientName = clientNames.get(position);
-        chosenProductName = productNames.get(position);
-      /*  Spinner spinner = (Spinner) parent;
-        if(spinner.getId() == R.id.clientSpinner){
 
+      Spinner spinner = (Spinner) parent;
+        if(spinner.getId() == R.id.clientSpinner){
+        chosenClientName = clientNames.get(position);
         }
         else if(spinner.getId() == R.id.productSpinner){
-
-        }*/
+        chosenProductName = productNames.get(position);
+        }
     }
 
     @Override
@@ -372,17 +371,6 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         Toast.makeText(getActivity(), R.string.no_client_chosen, Toast.LENGTH_SHORT).show();
     }
 
-    //TODO Non posso replicare OnItemSelected for Products , serve una soluzione alternativa per far funzionare spinner Prodotti e Clienti autonomamente.
-
-    /*@Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        chosenProductName = productNames.get(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(getActivity(), R.string.no_product_chosen, Toast.LENGTH_SHORT).show();
-    }*/
 
     @NonNull
     @Override
