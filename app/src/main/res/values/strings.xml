@@ -57,7 +57,7 @@
     <string name="select_client">Select Client: </string>
     <string name="select_quantity">Select Quantity: </string>
     <string name="select_date">Select Date: </string>
-    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
 
     //operations e validator
     <string name="enterprise_successfully_saved">Entry is successfully saved</string>

@@ -73,7 +73,6 @@
         app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toBottomOf="@+id/clientSpinner" />
 
-
     <EditText
         android:id="@+id/editDate"
         style="@style/editTextStyle"
@@ -81,8 +80,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
+        android:focusable="false"
         app:layout_constraintStart_toEndOf="@+id/barrier"
-        app:layout_constraintTop_toBottomOf="@+id/editQuantity" />
+        app:layout_constraintTop_toBottomOf="@+id/editQuantity"/>
 
     <EditText
         android:id="@+id/editPrice"
@@ -101,15 +101,15 @@
         tools:layout_editor_absoluteX="91dp" />
 
     <Button
-        android:id="@+id/buy_btn"
+        android:id="@+id/sell_btn"
         style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/buy"
+        android:layout_marginTop="@dimen/paddingOrMar_L"
+        android:text="@string/sell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPrice"
-        android:layout_marginTop="@dimen/paddingOrMar_L"/>
+        app:layout_constraintTop_toBottomOf="@id/editPrice"/>
 
     <Button
         android:id="@+id/meno"

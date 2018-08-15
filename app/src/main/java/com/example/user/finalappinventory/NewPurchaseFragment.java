@@ -65,7 +65,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
 
     private Button mButtonDash;
     private Button mButtonPlus;
-    private Button buy_btn;
+    private Button sell_btn;
 
     //declaration elem for datapicker
     final Calendar myCalendar = Calendar.getInstance();
@@ -95,10 +95,10 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
 
         mButtonDash = rootView.findViewById(R.id.meno);
         mButtonPlus = rootView.findViewById(R.id.piu);
-        buy_btn = rootView.findViewById(R.id.buy_btn);
+        sell_btn = rootView.findViewById(R.id.sell_btn);
 
         //Set click listeners on buttons
-        buy_btn.setOnClickListener(this);
+        sell_btn.setOnClickListener(this);
 
 
         // init - set date to current date
@@ -278,7 +278,6 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         }
     }
 
-
     public void onClick(View v) {
 
         if (savePurchase()) {
@@ -291,7 +290,6 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
                     .commit();
         }
     }
-
 
     private boolean savePurchase() {
 
@@ -359,6 +357,14 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         chosenClientName = clientNames.get(position);
+        chosenProductName = productNames.get(position);
+      /*  Spinner spinner = (Spinner) parent;
+        if(spinner.getId() == R.id.clientSpinner){
+
+        }
+        else if(spinner.getId() == R.id.productSpinner){
+
+        }*/
     }
 
     @Override
@@ -366,7 +372,8 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         Toast.makeText(getActivity(), R.string.no_client_chosen, Toast.LENGTH_SHORT).show();
     }
 
-    //TODO Non posso replicare OnItemSelected for Products , serve una soluzione alternativa per far funzionare spinner Prodotti
+    //TODO Non posso replicare OnItemSelected for Products , serve una soluzione alternativa per far funzionare spinner Prodotti e Clienti autonomamente.
+
     /*@Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         chosenProductName = productNames.get(position);

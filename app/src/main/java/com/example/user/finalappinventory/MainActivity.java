@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(findViewById(R.id.fab_main))
                     .setBackgroundColour(getResources().getColor(R.color.colorPrimary))
-                    .setPrimaryText("Welcome to your mobile inventory. Let's get started!")
+                    .setPrimaryText("Welcome to Quick-Pick inventory. Let's get started!")
                     .setSecondaryText("Tap the see more options")
                     .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                         @Override
