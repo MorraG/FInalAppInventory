@@ -38,13 +38,13 @@ public class PurchaseListFragment extends Fragment implements
     private Uri mCurrentPurchaseUri;
 
 
+    public PurchaseListFragment() {
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-    }
-
-    public PurchaseListFragment() {
     }
 
     @Nullable
@@ -125,11 +125,12 @@ public class PurchaseListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
             openAlertDialogForDelete();
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void openAlertDialogForDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
         builder.setMessage(R.string.AlertDialogForDelete_Question);
@@ -148,8 +149,9 @@ public class PurchaseListFragment extends Fragment implements
         builder.create();
         builder.show();
     }
-    private void deletePurchase(){
-        if(mCurrentPurchaseUri != null){
+
+    private void deletePurchase() {
+        if (mCurrentPurchaseUri != null) {
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentPurchaseUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
@@ -158,7 +160,7 @@ public class PurchaseListFragment extends Fragment implements
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(getActivity(), R.string.Successful_deletingProd,
+                Toast.makeText(getActivity(), R.string.Successful_deletingPurchase,
                         Toast.LENGTH_SHORT).show();
             }
         }

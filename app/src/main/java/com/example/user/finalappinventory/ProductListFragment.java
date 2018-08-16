@@ -36,13 +36,13 @@ public class ProductListFragment extends Fragment implements
     private Uri mCurrentProductUri;
 
 
+    public ProductListFragment() {
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-    }
-
-    public ProductListFragment() {
     }
 
     @Nullable
@@ -121,11 +121,12 @@ public class ProductListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
             openAlertDialogForDelete();
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void openAlertDialogForDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog);
         builder.setMessage(R.string.AlertDialogForDelete_Question);
@@ -144,8 +145,9 @@ public class ProductListFragment extends Fragment implements
         builder.create();
         builder.show();
     }
-    private void deleteProduct(){
-        if(mCurrentProductUri != null){
+
+    private void deleteProduct() {
+        if (mCurrentProductUri != null) {
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentProductUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {

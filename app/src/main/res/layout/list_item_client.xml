@@ -38,13 +38,9 @@
 
     <ImageButton
         android:id="@+id/client_item_phone_button"
-        android:layout_width="61dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="@dimen/paddingOrMar_S"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/list_item_client_contact_person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_contact_phone" />
+        app:srcCompat="@drawable/ic_contact_phone"
+        style="@style/PhoneButtonSupl_Client_Style"/>
 </android.support.constraint.ConstraintLayout>

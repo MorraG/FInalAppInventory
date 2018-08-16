@@ -103,8 +103,6 @@
     <Button
         android:id="@+id/sell_btn"
         style="@style/buttonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/paddingOrMar_L"
         android:text="@string/sell"
         app:layout_constraintEnd_toEndOf="parent"

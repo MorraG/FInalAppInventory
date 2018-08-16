@@ -30,19 +30,8 @@ public class InventoryProvider extends ContentProvider {
 
     private static final int PURCHASES = 400;
     private static final int PURCHASES_WITH_ID = 401;
-
-    private InventoryDBHelper mDbHelper;
-
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-
     private static final String LOG_TAG = InventoryProvider.class.getSimpleName();
-
-    @Override
-    public boolean onCreate() {
-        Context context = getContext();
-        mDbHelper = new InventoryDBHelper(context);
-        return true;
-    }
 
     static {
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS, PRODUCTS);
@@ -53,6 +42,15 @@ public class InventoryProvider extends ContentProvider {
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_CLIENTS + "/#", CLIENTS_ID);
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PURCHASES, PURCHASES);
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PURCHASES + "/#", PURCHASES_WITH_ID);
+    }
+
+    private InventoryDBHelper mDbHelper;
+
+    @Override
+    public boolean onCreate() {
+        Context context = getContext();
+        mDbHelper = new InventoryDBHelper(context);
+        return true;
     }
 
     @Nullable
@@ -111,7 +109,7 @@ public class InventoryProvider extends ContentProvider {
                         null);                   // The sort order
                 break;
             }
-            case CLIENTS_ID:  {
+            case CLIENTS_ID: {
                 selection = ClientEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
@@ -130,7 +128,7 @@ public class InventoryProvider extends ContentProvider {
                         null);                   // The sort order
                 break;
             }
-            case PURCHASES_WITH_ID:  {
+            case PURCHASES_WITH_ID: {
                 selection = PurchaseEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 

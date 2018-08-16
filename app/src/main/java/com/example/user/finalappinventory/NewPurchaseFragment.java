@@ -2,13 +2,10 @@ package com.example.user.finalappinventory;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +14,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -32,7 +28,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.finalappinventory.data.InventoryContract;
@@ -48,6 +43,11 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
         AdapterView.OnItemSelectedListener,
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    //declaration elem for datapicker
+    final Calendar myCalendar = Calendar.getInstance();
+    String dateFormat = "dd.MM.yyyy";
+    DatePickerDialog.OnDateSetListener date;
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
     //elem needed declaration
     private Spinner mProductSpin;
     private Spinner mClientSpin;
@@ -60,19 +60,10 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     private String chosenProductName = null;
     private ArrayAdapter<String> mSpinAdapterClt;
     private ArrayAdapter<String> mSpinAdapterPrt;
-
     private Uri mCurrentPurchaseUri;
-
     private Button mButtonDash;
     private Button mButtonPlus;
     private Button sell_btn;
-
-    //declaration elem for datapicker
-    final Calendar myCalendar = Calendar.getInstance();
-    String dateFormat = "dd.MM.yyyy";
-    DatePickerDialog.OnDateSetListener date;
-    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
-
     private int quantityAddProduct;
 
     public NewPurchaseFragment() {
@@ -357,12 +348,11 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-      Spinner spinner = (Spinner) parent;
-        if(spinner.getId() == R.id.clientSpinner){
-        chosenClientName = clientNames.get(position);
-        }
-        else if(spinner.getId() == R.id.productSpinner){
-        chosenProductName = productNames.get(position);
+        Spinner spinner = (Spinner) parent;
+        if (spinner.getId() == R.id.clientSpinner) {
+            chosenClientName = clientNames.get(position);
+        } else if (spinner.getId() == R.id.productSpinner) {
+            chosenProductName = productNames.get(position);
         }
     }
 
@@ -402,7 +392,7 @@ public class NewPurchaseFragment extends Fragment implements View.OnClickListene
             String clientName = cursor.getString(clientColumnIndex);
             String date = cursor.getString(dateColumnIndex);
 
-            // Temporary TODO temporanea variabile per price
+            // TODO temporary variabile for price waiting new logic for price
             float price = cursor.getFloat(priceColumnIndex);
 
 

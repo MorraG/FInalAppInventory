@@ -7,22 +7,18 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_main"
-        android:layout_width="@dimen/paddingOrMar_XXXL"
-        android:layout_height="@dimen/paddingOrMar_XXXL"
         android:layout_marginBottom="@dimen/paddingOrMar_L"
-        android:layout_marginEnd="@dimen/paddingOrMar_L"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:useCompatPadding="true" />
+        app:useCompatPadding="true"
+        style="@style/FabClickedStateStyle" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_item"
-        android:layout_width="@dimen/paddingOrMar_XXXL"
-        android:layout_height="@dimen/paddingOrMar_XXXL"
-        android:layout_marginEnd="@dimen/paddingOrMar_L"
         app:layout_constraintBottom_toTopOf="@id/fab_main"
         app:layout_constraintRight_toRightOf="parent"
-        app:useCompatPadding="true" />
+        app:useCompatPadding="true"
+        style="@style/FabClickedStateStyle"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_newPurchase"
@@ -35,30 +31,24 @@
 
     <TextView
         android:id="@+id/hint_add_product"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:text="@string/add_product"
-        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="@+id/fab_add_item"
-        app:layout_constraintTop_toTopOf="@id/fab_add_item" />
+        app:layout_constraintTop_toTopOf="@id/fab_add_item"
+        style="@style/TextViewFabClickedStateStyle" />
 
     <TextView
         android:id="@+id/hint_purchase"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:text="@string/new_purchase"
         app:layout_constraintEnd_toEndOf="@+id/fab_newPurchase"
-        app:layout_constraintTop_toTopOf="@+id/fab_main" />
+        app:layout_constraintTop_toTopOf="@+id/fab_main"
+        style="@style/TextViewFabClickedStateStyle"/>
 
     <TextView
         android:id="@+id/hint_cancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:text="@string/cancel"
-        android:gravity="center_horizontal"
         app:layout_constraintTop_toTopOf="@+id/fab_main"
         app:layout_constraintEnd_toEndOf="@+id/fab_main"
-        app:layout_constraintStart_toStartOf="@id/fab_main"/>
+        app:layout_constraintStart_toStartOf="@id/fab_main"
+        style="@style/TextViewFabClickedStateStyle"/>
 
 </android.support.constraint.ConstraintLayout>

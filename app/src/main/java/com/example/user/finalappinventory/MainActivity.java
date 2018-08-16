@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
 
-            case R.id.purchases_list:{
+            case R.id.purchases_list: {
                 openPurchasesListFragment(Costants.PURCHASE);
                 break;
             }
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void openPurchasesListFragment(String transaction){
+    private void openPurchasesListFragment(String transaction) {
         PurchaseListFragment purchaseListFrag = new PurchaseListFragment();
         Bundle args = new Bundle();
         args.putString(Costants.PURCHASE, transaction);

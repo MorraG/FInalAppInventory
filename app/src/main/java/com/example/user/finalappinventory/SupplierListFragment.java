@@ -37,13 +37,13 @@ public class SupplierListFragment extends Fragment implements
     private Context mContext;
     private Uri mCurrentSupplierUri;
 
+    public SupplierListFragment() {
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-    }
-
-    public SupplierListFragment() {
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -120,7 +120,7 @@ public class SupplierListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
             openAlertDialogForDelete();
         }
         return super.onOptionsItemSelected(item);
@@ -145,8 +145,8 @@ public class SupplierListFragment extends Fragment implements
         builder.show();
     }
 
-    private void deleteSupplier(){
-        if(mCurrentSupplierUri != null){
+    private void deleteSupplier() {
+        if (mCurrentSupplierUri != null) {
             int rowsDeleted = getActivity().getContentResolver().delete(mCurrentSupplierUri, null, null);
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {

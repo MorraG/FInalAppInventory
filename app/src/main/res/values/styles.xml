@@ -41,6 +41,8 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:paddingStart">@dimen/paddingOrMar_S</item>
         <item name="android:paddingEnd">@dimen/paddingOrMar_S</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="product_item_button_style">
@@ -50,6 +52,42 @@
         <item name="android:padding">@dimen/paddingOrMar_S</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="fabBaseStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/paddingOrMar_L</item>
+    </style>
+
+    <style name="FabTextViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/hint_background</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/hint_textsize</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="FabClickedStateStyle">
+        <item name="android:layout_width">@dimen/paddingOrMar_XXXL</item>
+        <item name="android:layout_height">@dimen/paddingOrMar_XXXL</item>
+        <item name="android:layout_marginEnd">@dimen/paddingOrMar_L</item>
+    </style>
+
+    <style name="TextViewFabClickedStateStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="PhoneButtonSupl_Client_Style">
+        <item name="android:layout_width">61dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginTop">@dimen/paddingOrMar_S</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

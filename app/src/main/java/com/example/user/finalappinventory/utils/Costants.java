@@ -8,15 +8,9 @@ public final class Costants {
 
     public final static String SUPPLIER = "Supplier";
 
-    public final static String  PRODUCT = "Product";
+    public final static String PRODUCT = "Product";
 
-    public final static String  PURCHASE= "Purchase";
-
-    public final static String ADD_PRODUCT_FRAGMENT = "addProductFragment";
-
-    public final static String ADD_SUPPLIER_FRAGMENT = "addSupplierFragment";
-
-    public final static String ADD_TRANSACTION_FRAGMENT = "addTransactionFragment";
+    public final static String PURCHASE = "Purchase";
 
     //Loader ids
 
@@ -24,32 +18,19 @@ public final class Costants {
 
     public final static int SINGLE_PRODUCT_LOADER = 1235;
 
-
-
-
     public final static int SUPPLIER_LOADER = 7894;
 
     public final static int CLIENT_LOADER = 7895;
 
     public final static int PURCHASE_LOADER = 7896;
 
-
-
     //Keys
 
     public final static String PRODUCT_URI = "productUri";
-
-    public final static String PRODUCT_ID = "productId";
-
-    public final static String PRODUCT_NAME = "productName";
     public final static String CLIENT_URI = "clientUri";
     public final static String SUPPLIER_URI = "supplierUri";
-
     public final static String PURCHASE_URI = "purchaseUri";
-
     public final static String IS_FAB_CLICKED = "isFabClicked";
-
-
 
     //Keys used for SharedPreferences
 

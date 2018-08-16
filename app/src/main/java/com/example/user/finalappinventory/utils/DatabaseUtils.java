@@ -2,16 +2,14 @@ package com.example.user.finalappinventory.utils;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.user.finalappinventory.data.InventoryContract;
-import com.example.user.finalappinventory.data.InventoryDBHelper;
 
 import java.util.ArrayList;
 
 public final class DatabaseUtils {
 
-    public static ArrayList<String> getSuppliersNames(Context context, String relationshipType){
+    public static ArrayList<String> getSuppliersNames(Context context, String relationshipType) {
         ArrayList<String> supplierList = new ArrayList<>();
         String[] projection = {InventoryContract.SupplierEntry.SUPPLIER_NAME};
         String[] selectionArgs = {relationshipType};
@@ -29,7 +27,7 @@ public final class DatabaseUtils {
         return supplierList;
     }
 
-    public static ArrayList<String> getClientsNames(Context context, String relationshipType){
+    public static ArrayList<String> getClientsNames(Context context, String relationshipType) {
         ArrayList<String> clientList = new ArrayList<>();
         String[] projection = {InventoryContract.ClientEntry.CLIENT_NAME};
         String[] selectionArgs = {relationshipType};
@@ -48,7 +46,7 @@ public final class DatabaseUtils {
     }
 
 
-    public static ArrayList<String> getProductsNames(Context context, String product){
+    public static ArrayList<String> getProductsNames(Context context, String product) {
         ArrayList<String> productList = new ArrayList<>();
         String[] projection = {InventoryContract.ProductEntry.PRODUCT_NAME};
         Cursor cursor = context.getContentResolver().query(InventoryContract.ProductEntry.CONTENT_URI,
@@ -64,11 +62,4 @@ public final class DatabaseUtils {
         cursor.close();
         return productList;
     }
-
-   /* public static Cursor mergeTables(Context context, long id){
-        InventoryDBHelper dbHelper = new InventoryDBHelper(context);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] selectionArgs = {String.valueOf(id)};
-        return db.rawQuery("SELECT products.productName, products.clientName, clients.clientPhone FROM products INNER JOIN clients ON (products.supplierName = clients.clientName AND products._ID=?)", selectionArgs);
-    }*/
 }

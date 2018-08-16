@@ -34,78 +34,53 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_add_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/paddingOrMar_L"
             app:srcCompat="@drawable/ic_add_circle"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:useCompatPadding="true" />
+            app:useCompatPadding="true"
+            style="@style/fabBaseStyle" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_newPurchase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/paddingOrMar_L"
             app:backgroundTint="@color/acquisition"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:srcCompat="@drawable/ic_attach_money"
-            app:useCompatPadding="true" />
+            app:useCompatPadding="true"
+            style="@style/fabBaseStyle"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/paddingOrMar_L"
             android:padding="0dp"
             app:useCompatPadding="true"
             app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_add_circle" />
+            app:srcCompat="@drawable/ic_add_circle"
+            style="@style/fabBaseStyle"/>
 
         <TextView
             android:id="@+id/hint_add_product"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/hint_background"
-            android:gravity="center_horizontal"
             android:text="@string/add_product"
-            android:textStyle="bold"
-            android:textSize="@dimen/hint_textsize"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_add_item"
             app:layout_constraintStart_toEndOf="@+id/fab_newPurchase"
-            app:layout_constraintTop_toTopOf="@id/fab_add_item" />
+            app:layout_constraintTop_toTopOf="@id/fab_add_item"
+            style="@style/FabTextViewStyle" />
 
         <TextView
             android:id="@+id/hint_purchase"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/hint_background"
-            android:gravity="center_horizontal"
-            android:text="@string/new_purchase"
-            android:textStyle="bold"
-            android:textSize="@dimen/hint_textsize"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_newPurchase"
-            app:layout_constraintTop_toTopOf="@+id/fab_main" />
+            app:layout_constraintTop_toTopOf="@+id/fab_main"
+            style="@style/FabTextViewStyle"/>
 
         <TextView
             android:id="@+id/hint_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/hint_background"
-            android:gravity="center_horizontal"
             android:text="@string/cancel"
-            android:textStyle="bold"
-            android:textSize="@dimen/hint_textsize"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/fab_main"
             app:layout_constraintStart_toStartOf="@+id/fab_main"
-            app:layout_constraintTop_toTopOf="@+id/fab_main" />
+            app:layout_constraintTop_toTopOf="@+id/fab_main"
+            style="@style/FabTextViewStyle"/>
 
     </android.support.constraint.ConstraintLayout>
 

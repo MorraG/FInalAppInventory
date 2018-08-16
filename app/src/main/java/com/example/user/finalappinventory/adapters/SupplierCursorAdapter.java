@@ -65,7 +65,7 @@ public class SupplierCursorAdapter extends CursorAdapter {
         });
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onItemClicked(long id);
     }
 }
